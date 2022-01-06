@@ -16,6 +16,7 @@ class DadosSolicitante extends Migration
         Schema::create('dado_solicitante', function (Blueprint $table){
             $table->integer('id_solicitante')->autoIncrement('id_solicitante');
             $table->integer('solicitante_id');
+            $table->morphs('cpf');
             $table->morphs('nome_solicitante');
             $table->morphs('email_solicitante');
             $table->integer('departamento_id');

@@ -16,6 +16,7 @@ class DadosTecnico extends Migration
         Schema::create('dado_tecnico', function (Blueprint $table){
             $table->integer('id_tecnico')->autoIncrement('id_tecnico');
             $table->integer('tecnico_id');
+            $table->morphs('cpf');
             $table->morphs('nome_tecnico');
             $table->morphs('email_tecnico');
             $table->integer('departamento_id');

@@ -1,5 +1,6 @@
 <?php
 
+use Brick\Math\BigInteger;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,25 +28,24 @@ Route::get('/contato', function () {
 });
 */
 
-//Route Principal
+//Route Login
+Route::get('/chamado', 'LoginController@login')->name('chamado.login');
 
-Route::get('/login', function () {
-    return 'Login';
-})->name('site.index');
+Route::middleware('autenticacao:padrao')->prefix('/chamado')->group(function () {
 
-Route::prefix('/app')->group(function () {
     //Route Técnico
-    Route::get('/tecnico', 'TecnicoController@tecnico')->name('app.tecnico');
+    Route::get('/tecnico', 'TecnicoController@tecnico')->name('chamado.tecnico');
+    Route::put('/tecnico/update/{idchamado}', 'TecnicoController@atribuir')->name('chamado.tecnico.atribuir');
+    Route::put('/tecnico/status/{idchamado}', 'TecnicoController@status')->name('chamado.tecnico.status');
 
     //Route Meus Chamados
-    Route::get('/meuschamados', 'MeusChamadosController@meuschamados')->name('app.meuschamados');
+    Route::get('/meuschamados', 'MeusChamadosController@meuschamados')->name('chamado.meuschamados');
 
     //Route Solicitante
-    Route::get('/solicitante', 'SolicitanteController@solicitante')->name('app.solicitante');
-    Route::post('/solicitante', 'SolicitanteController@cadastrar_chamado')->name('app.solicitante');
-
-    //exemplo da aula
-    Route::get('/fornecedores', 'FornecedorController@index');
+    Route::get('/solicitante', 'SolicitanteController@solicitante')->name('chamado.solicitante');
+    Route::post('/solicitante', 'SolicitanteController@cadastrar_chamado')->name('chamado.solicitante');
+    Route::put('/solicitante/update/{idchamado}', 'SolicitanteController@update')->name('chamado.solicitante.update');
+    Route::delete('/solicitante/destroy/{idchamado}', 'SolicitanteController@destroy')->name('chamado.solicitante.destroy');
 });
 
 
@@ -54,6 +54,6 @@ Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');
 
 
 Route::fallback(function(){
-    echo 'Rota acessada inexistente. <a href="'.route('app.tecnico').'">clique aqui</a>
+    echo 'Rota acessada inexistente. <a href="'.route('chamado.tecnico').'">clique aqui</a>
     para ir para a rota inicial';
 });

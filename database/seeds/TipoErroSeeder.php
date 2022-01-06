@@ -14,5 +14,7 @@ class TipoErroSeeder extends Seeder
     {
         TipoErro::create(['tipo_erro' => 'Dificuldade de acesso']);
         TipoErro::create(['tipo_erro' => 'Cadastro de dados']);
+        TipoErro::create(['tipo_erro' => 'ORBI']);
+        TipoErro::create(['tipo_erro' => 'AVA']);
     }
 }

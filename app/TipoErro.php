@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoErro extends Model
 {
-    //
+    protected $fillable = ['tipo_erro'];
 }

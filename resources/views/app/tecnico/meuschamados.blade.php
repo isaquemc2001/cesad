@@ -34,7 +34,7 @@
     });
 </script>
 
-@include('app.layouts._partials.topo_tecnico')
+@include('app.layouts._partials.tecnico.topo_tecnico')
 
 <!--INICIO GRID DOS CHAMADOS-->
 <div class="container">

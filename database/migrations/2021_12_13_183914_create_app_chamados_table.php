@@ -19,12 +19,13 @@ class CreateAppChamadosTable extends Migration
             $table->integer('tecnico_id');
             $table->string('titulo', 100);
             $table->integer('tipo_erro');
-            $table->string('anexo', 100);
+            $table->string('anexo', 100)->nullable();
             $table->text('descricao');
             $table->date('data_abertura');
             $table->date('data_alteracao');
             $table->integer('status');
             $table->integer('prioridade');
+            $table->integer('tecnico_atribuido')->nullable();
             $table->timestamps();
 
             //foreign key

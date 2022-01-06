@@ -215,6 +215,19 @@ table {
     font-size: 15px;
 }
 
+.th-titulo{
+    width: 18%;
+}
+.th-categoria{
+    width: 12%;
+}
+.th-descricao{
+    width: 56%;
+}
+.th-acoes{
+    width: 14%;
+}
+
 .table tbody>tr:nth-child(odd)>td, .table tbody>tr:nth-child(odd)>th {
     background-color: #f8f8f8;
 }
