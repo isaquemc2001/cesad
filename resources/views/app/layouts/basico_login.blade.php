@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chamado - @yield('titulo')</title>
+    <meta name="theme-color" content="blue">
 
     <!--Style CSS-->
     <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
@@ -132,9 +133,11 @@
 
     @yield('conteudo')
 
+    <!--
     <script type="text/javascript">
         $("#cpf").mask("000.000.000-00");
     </script>
+    -->
 
 </body>
 

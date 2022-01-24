@@ -111,8 +111,29 @@
                         </div>
                         <div class="col-12 col-sm-6">
                             <h5>Descrição</h5>
-                            <textarea class="form-control" id="textarea-disabled" rows="17"
+                            <textarea class="form-control mb-4" id="textarea-disabled" rows="7"
                                 disabled>{{ $dados_chamado->descricao }}</textarea>
+
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5>Atualização</h5>
+                                </div>
+                                <div class="col-4">
+                                    <button type="button" class="btn-table btn badge bg-primary ml-4"
+                                        data-bs-dismiss="modal">Histórico de Atualização</button>
+                                </div>
+                            </div>
+
+                            @php
+                                if ($dados_chamado->resposta == true) {
+                                    $resposta = $dados_chamado->resposta;
+                                } else {
+                                    $resposta = 'Resposta pendente.';
+                                }
+                            @endphp
+
+                            <textarea class="form-control" id="textarea-disabled" rows="7"
+                                disabled>@php echo $resposta; @endphp</textarea>
                         </div>
                     </div>
                 </div>
@@ -183,7 +204,8 @@
                     @csrf
                     @method('PUT')
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Atualização de Status do Chamado - {{ $dados_chamado->titulo }}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Atualização de Status do Chamado -
+                            {{ $dados_chamado->titulo }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -197,7 +219,8 @@
                             </select>
 
                             <h6>Informe a Descrição da Atualização</h6>
-                            <textarea class="form-control" name="resposta">{{ $dados_chamado->resposta }}</textarea>
+                            <textarea class="form-control"
+                                name="resposta">{{ $dados_chamado->resposta }}</textarea>
 
                             <input type="text" value="@php echo $data_alteracao = date('d/m/Y')  @endphp" name="data_alteracao" hidden>
                         </div>

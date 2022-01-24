@@ -16,7 +16,6 @@ class AutenticacaoMiddleware
      */
     public function handle($request, Closure $next, $metodo_autenticacao)
     {
-
         if($metodo_autenticacao == 'padrao'){
             return $next($request);
         }

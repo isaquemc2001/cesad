@@ -2,7 +2,7 @@
 
 use Brick\Math\BigInteger;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +30,9 @@ Route::get('/contato', function () {
 
 //Route Login
 Route::get('/chamado', 'LoginController@login')->name('chamado.login');
+Route::post('/chamado', 'LoginController@autenticar')->name('chamado.logon');
+
+Route::get('/chamado/primeiroacesso', 'PrimeiroAcesso@cadastro')->name('chamado.primeiroacesso');
 
 Route::middleware('autenticacao:padrao')->prefix('/chamado')->group(function () {
 
@@ -54,6 +57,15 @@ Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');
 
 
 Route::fallback(function(){
-    echo 'Rota acessada inexistente. <a href="'.route('chamado.tecnico').'">clique aqui</a>
+    echo 'Rota acessada inexistente. <a href="'.route('chamado.login').'">clique aqui</a>
     para ir para a rota inicial';
+});
+
+//teste session
+Route::get('home', function (Request $request) {
+    session_start();
+    if ($request->session()->has($_SESSION)) {
+        echo 'existe';
+        print_r($_SESSION);
+    }
 });
