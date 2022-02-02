@@ -30,7 +30,10 @@
                         "next": "Próxima",
                         "previous": "Anterior"
                     }
-                }
+                },
+                "order": [
+                    [5, "desc"]
+                ]
             });
         });
     </script>
@@ -72,6 +75,7 @@
                             <input type="text" value="@php echo $data_alteracao = date('d/m/Y')  @endphp" name="dataAlteracao" hidden>
                             <input type="text" value="@php echo $status = "3";  @endphp" name="Status" hidden>
                             <input type="text" value="@php echo $prioridade = "2";  @endphp" name="Prioridade" hidden>
+                            <input type="text" value="@php echo $_SESSION['idusuario'];  @endphp" name="Idusuario" hidden>
                         </div>
                     </div>
                     <div class="modal-footer">

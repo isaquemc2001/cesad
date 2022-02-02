@@ -1,3 +1,10 @@
+<?php
+$nome = $_SESSION['nome'];
+$letra = explode(' ', $nome);
+
+$letra[0][0];
+
+?>
 
 <!--INICIO NAVBAR-->
 <nav class="navbar navbar-light d-flex shadow">
@@ -26,6 +33,22 @@
                                 </svg>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="aberto" class="nav-link py-3 @if($titulo == "Chamados em Aberto"){ active }  @endif border-bottom"
+                                aria-current="page" title="Chamados em Aberto" data-bs-toggle="tooltip" data-bs-placement="right">
+                                <svg class="bi" width="24" height="24" role="img">
+                                    <use xlink:href="#speedometer" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="concluido" class="nav-link py-3 @if($titulo == "Chamados Concluidos"){ active }  @endif border-bottom"
+                                aria-current="page" title="Chamados Concluidos" data-bs-toggle="tooltip" data-bs-placement="right">
+                                <svg class="bi" width="24" height="24" role="img" aria-label="Home">
+                                    <use xlink:href="#check" />
+                                </svg>
+                            </a>
+                        </li>
                         <li>
                             <a class="nav-link py-3 border-bottom" title="Novo Chamado" data-bs-toggle="modal"
                                 data-bs-target="#cadastrar-chamado" data-bs-placement="right">
@@ -46,34 +69,25 @@
             </div>
         </div>
 
-        <input type="text" value="{{ $errors }}">
-
         <ul class="nav d-flex">
             <li>
                 <div class="dropdown dropstart">
                     <a href="#" class="d-flex" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img src="{{ asset('images/I.png') }}" class="btn-nav btn-perfil" href="#"
-                            title="Acesso Rápido" role="button" id="dropdown" aria-expanded="false">
+                        <img src="/images/icons_perfil/<?php echo $letra[0][0]; ?>.png" class="btn-nav btn-perfil" href="#"
+                            title="Perfil" role="button" id="dropdown" aria-expanded="false">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <li><button class="dropdown-item" type="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                    <path fill-rule="evenodd"
-                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                                </svg> Perfil
-                            </button></li>
-                        <li><button class="dropdown-item" type="button">
+                        <a href="sair" style="text-decoration: none;"><li><button class="dropdown-item" type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
                                         d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
                                     <path fill-rule="evenodd"
                                         d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                                </svg> Sair
-                            </button></li>
+                                </svg>
+                                Sair
+                            </button></li></a>
                     </ul>
                 </div>
             </li>
@@ -91,10 +105,26 @@
     </a>
     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
         <li class="nav-item">
-            <a href="solicitante" class="nav-link active py-3 border-bottom"
-                aria-current="page" title="Página Inicial" data-bs-toggle="tooltip" data-bs-placement="right">
+            <a href="solicitante" class="nav-link @if($titulo == "Principal Solicitante"){ active }  @endif py-3 border-bottom"
+                aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" title="Página Inicial">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                     <use xlink:href="#home" />
+                </svg>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="aberto" class="nav-link py-3 @if($titulo == "Chamados em Aberto"){ active }  @endif border-bottom"
+                aria-current="page" title="Chamados em Aberto" data-bs-toggle="tooltip" data-bs-placement="right">
+                <svg class="bi" width="24" height="24" role="img" aria-label="Home">
+                    <use xlink:href="#speedometer" />
+                </svg>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="concluido" class="nav-link py-3 @if($titulo == "Chamados Concluidos"){ active }  @endif border-bottom"
+                aria-current="page" title="Chamados Concluidos" data-bs-toggle="tooltip" data-bs-placement="right">
+                <svg class="bi" width="24" height="24" role="img" aria-label="Home">
+                    <use xlink:href="#check" />
                 </svg>
             </a>
         </li>

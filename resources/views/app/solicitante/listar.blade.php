@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6 col-xxl-10">
-            <h1 class="titulos-pag">Chamados</h1>
+            <h1 class="titulos-pag">Meus Chamados</h1>
         </div>
         <div class="col-6 col-xxl-2 d-flex justify-content-end" style="height: 50%;">
             <div class="btn-add btn btn-success" title="Novo Chamado" data-bs-toggle="modal"
@@ -20,8 +20,10 @@
                     <tr>
                         <th class="th-titulo">Título</th>
                         <th class="th-categoria">Categoria</th>
+                        <th class="th-status">Status</th>
                         <th class="th-descricao">Descrição</th>
                         <th class="th-acoes">Ações</th>
+                        <th hidden>data-abertura</th>
                     </tr>
                 </thead>
 
@@ -52,12 +54,17 @@
                                     }
                                 @endphp
                             </td>
-                            <td>{{ $dados_chamado->descricao }}</td>
+                            <td>@if ($dados_chamado->status == "1")
+                                Em aberto
+                            @else
+                                Concluido
+                            @endif</td>
+                            <td style="white-space: normal">{{ $dados_chamado->descricao }}</td>
                             <td>
                                 <div class="btn-table btn badge bg-primary" data-bs-toggle="modal"
                                     data-bs-target="#visualizar-chamado{{ $dados_chamado->id }}">Visualizar</div>
                                 <div class="btn-table btn badge bg-warning ml-2" data-bs-toggle="modal"
-                                    data-bs-target="#editar-chamado{{ $dados_chamado->id }}">Editar</div>
+                                    data-bs-target="#editar-chamado{{ $dados_chamado->id }}"@if($dados_chamado->status == '2'){ hidden }  @endif>Editar</div>
                                 <div class="btn-table">
                                     <form
                                         action="{{ route('chamado.solicitante.destroy', ['idchamado' => $dados_chamado->id]) }}"
@@ -68,6 +75,7 @@
                                     </form>
                                 </div>
                             </td>
+                            <td hidden>{{ $dados_chamado->data_abertura }}</td>
                         </tr>
                     @endforeach
                 </tbody>

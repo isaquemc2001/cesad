@@ -18,12 +18,21 @@
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <h5>Nome do Técnico</h5>
-                                    <input type="text" class="form-control mb-4" value="" disabled>
+                                    @php
+                                        if ($dados_chamado->tecnico_atribuido == '1') {
+                                            $tecnico_atribuido = 'Isaque Matos Conceição';
+                                        } elseif ($dados_chamado->tecnico_atribuido == '2') {
+                                            $tecnico_atribuido = 'João Victor dos Santos Oliveira';
+                                        } elseif ($dados_chamado->tecnico_atribuido == '3') {
+                                            $tecnico_atribuido = 'Matheus Andrade';
+                                        } else {
+                                            $tecnico_atribuido = '';
+                                        }
+                                    @endphp
+                                    <input type="text" class="form-control mb-4" value="{{ $tecnico_atribuido }}"
+                                        disabled>
                                 </div>
-                                <div class="col-12 col-sm-6">
-                                    <h5>Nome do Solicitante</h5>
-                                    <input type="text" class="form-control mb-4" value="" disabled>
-                                </div>
+                                @include('app.layouts._partials.tecnico.solicitante')
                             </div>
 
                             <div class="row">
@@ -35,8 +44,8 @@
                                                 echo $dados = 'Aberto';
                                             } elseif ($dados_chamado->status == '2') {
                                                 echo $dados = 'Concluido';
-                                            } elseif ($dados_chamado->status == '3') {
-                                                echo $dados = 'Não-Atribuido';
+                                            } else{
+                                                echo $dados = 'Não-atribuido';
                                             }
                                         @endphp</option>
                                     </select>
@@ -82,12 +91,6 @@
                                                 echo $dados = 'ORBI';
                                             }
                                         @endphp</option>
-                                    </select>
-                                </div>
-                                <div class="col-6 col-sm-6">
-                                    <h5>Setor</h5>
-                                    <select id="categoria-disabled" class="form-select mb-4" disabled>
-                                        <option></option>
                                     </select>
                                 </div>
                             </div>
@@ -166,7 +169,7 @@
                                 <div class="col">
                                     <h6>Selecione o Técnico</h6>
                                     <select class="form-select" name="tecnico_atribuido">
-                                        <option selected>Selecione</option>
+                                        <option value="0" selected>Selecione</option>
                                         <option value="1">Isaque Matos Conceição</option>
                                         <option value="2">João Victor dos Santos Oliveira</option>
                                         <option value="3">Matheus Andrade</option>
@@ -181,6 +184,7 @@
                                         <option value="3">Alta</option>
                                     </select>
                                 </div>
+                                <input type="text" name="status" value="1" hidden>
                             </div>
                         </div>
                     </div>
@@ -215,7 +219,6 @@
                             <select class="form-select mb-4" name="status">
                                 <option value="1" selected>Aberto</option>
                                 <option value="2">Concluido</option>
-                                <option value="3">Não-Atribuido</option>
                             </select>
 
                             <h6>Informe a Descrição da Atualização</h6>

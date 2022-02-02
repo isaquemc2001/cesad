@@ -8,10 +8,26 @@ html, body {
     overflow-x: hidden;
 }
 
+.background{
+    background: url(/images/fundo_login.jpg);
+    height: 100%;
+    display: flex;
+}
+
+.logochamado{
+    margin-left: 50px;
+    justify-content: center;
+}
+
 .card{
     margin-top:10%;
     margin-left: 35%;
     width: 30%;
-    height: 50%;
+    height: 45vh;
     justify-content: center;
+}
+
+span{
+    color: red;
+    font-size: 12;
 }

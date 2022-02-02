@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Facade\FlareClient\Http\Response;
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class AutenticacaoMiddleware
 {
@@ -14,12 +15,16 @@ class AutenticacaoMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
+
     public function handle($request, Closure $next, $metodo_autenticacao)
     {
-        if($metodo_autenticacao == 'padrao'){
-            return $next($request);
-        }
+        session_start();
 
-        return Response('Acesso negado! Você não está autenticado.');
+        if(isset($_SESSION['cpf']) && $_SESSION['cpf'] != ''){
+            return $next($request);
+            session_destroy();
+        }else{
+            return Response('Você não está autenticado! Clique <a href="/chamado">aqui </a>para o login');
+        }
     }
 }

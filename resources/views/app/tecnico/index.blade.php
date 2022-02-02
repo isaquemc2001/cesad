@@ -29,8 +29,10 @@
                         "next": "Próxima",
                         "previous": "Anterior"
                     }
-                }
-
+                },
+                "order": [
+                    [5, "desc"]
+                ]
 
             });
         });
@@ -56,10 +58,12 @@
 
                     <thead>
                         <tr>
-                            <th>Titulo</th>
-                            <th>Categoria</th>
-                            <th>Descrição</th>
-                            <th>Ações</th>
+                            <th class="th-titulo-tec">Título</th>
+                            <th class="th-categoria-tec">Categoria</th>
+                            <th class="th-status-tec">Status</th>
+                            <th class="th-descricao-tec">Descrição</th>
+                            <th class="th-acoes-tec">Ações</th>
+                            <th hidden>data-abertura</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,8 +93,14 @@
                                         }
                                     @endphp
                                 </td>
+                                <td>
+                                    @if ($dados_chamado->status == '1')
+                                        Em aberto
+                                    @else
+                                        Concluido
+                                    @endif
+                                </td>
                                 <td>{{ $dados_chamado->descricao }}</td>
-
                                 <td>
                                     <div class="btn-table btn badge bg-primary" data-bs-toggle="modal"
                                         data-bs-target="#visualizar-chamado{{ $dados_chamado->id }}">Visualizar</div>
@@ -99,6 +109,8 @@
                                     <div class="btn-table btn badge bg-success ml-2" data-bs-toggle="modal"
                                         data-bs-target="#alterar-status{{ $dados_chamado->id }}">Alterar Status</div>
                                 </td>
+
+                                <td hidden>{{ $dados_chamado->data_abertura }}</td>
                             </tr>
                         @endforeach
                     </tbody>

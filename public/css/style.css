@@ -221,11 +221,31 @@ table {
 .th-categoria{
     width: 12%;
 }
+.th-status{
+    width: 9%;
+}
 .th-descricao{
-    width: 56%;
+    width: 47%;
+
 }
 .th-acoes{
     width: 14%;
+}
+
+.th-titulo-tec{
+    width: 18%;
+}
+.th-categoria-tec{
+    width: 12%;
+}
+.th-status-tec{
+    width: 9%;
+}
+.th-descricao-tec{
+    width: 39%;
+}
+.th-acoes-tec{
+    width: 16%;
 }
 
 .table tbody>tr:nth-child(odd)>td, .table tbody>tr:nth-child(odd)>th {
@@ -245,7 +265,7 @@ table {
         display: block;
     }
     .table-responsive td, .table-responsive th {
-        height: 35px;
+        height: auto;
     }
     .table-responsive thead {
         float: left;
@@ -262,5 +282,38 @@ table {
     }
     .table td:last-child {
         border-right: #999999 solid 1px;
+    }
+    .th-titulo{
+        width: auto;
+    }
+    .th-categoria{
+        width: auto;
+    }
+    .th-status{
+        width: auto;
+    }
+    .th-descricao{
+        width: auto;
+        height: auto;
+        white-space: normal;
+    }
+    .th-acoes{
+        width: auto;
+    }
+
+    .th-titulo-tec{
+        width: 18%;
+    }
+    .th-categoria-tec{
+        width: 12%;
+    }
+    .th-status-tec{
+        width: 9%;
+    }
+    .th-descricao-tec{
+        width: 39%;
+    }
+    .th-acoes-tec{
+        width: 16%;
     }
 }

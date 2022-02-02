@@ -34,21 +34,25 @@ Route::post('/chamado', 'LoginController@autenticar')->name('chamado.logon');
 
 Route::get('/chamado/primeiroacesso', 'PrimeiroAcesso@cadastro')->name('chamado.primeiroacesso');
 
-Route::middleware('autenticacao:padrao')->prefix('/chamado')->group(function () {
+Route::middleware('autenticacao: padrao')->prefix('/chamado')->group(function () {
 
     //Route Técnico
     Route::get('/tecnico', 'TecnicoController@tecnico')->name('chamado.tecnico');
     Route::put('/tecnico/update/{idchamado}', 'TecnicoController@atribuir')->name('chamado.tecnico.atribuir');
     Route::put('/tecnico/status/{idchamado}', 'TecnicoController@status')->name('chamado.tecnico.status');
+    Route::get('/meuschamados', 'TecnicoController@meuschamados')->name('chamado.meuschamados');
 
-    //Route Meus Chamados
-    Route::get('/meuschamados', 'MeusChamadosController@meuschamados')->name('chamado.meuschamados');
+    //SAIR
+    Route::get('/sair', 'LoginController@logout')->name('chamado.sair');
 
     //Route Solicitante
     Route::get('/solicitante', 'SolicitanteController@solicitante')->name('chamado.solicitante');
     Route::post('/solicitante', 'SolicitanteController@cadastrar_chamado')->name('chamado.solicitante');
     Route::put('/solicitante/update/{idchamado}', 'SolicitanteController@update')->name('chamado.solicitante.update');
     Route::delete('/solicitante/destroy/{idchamado}', 'SolicitanteController@destroy')->name('chamado.solicitante.destroy');
+
+    Route::get('/aberto', 'SolicitanteController@em_aberto')->name('chamado.solicitante.em_aberto');
+    Route::get('/concluido', 'SolicitanteController@concluido')->name('chamado.solicitante.concluido');
 });
 
 
@@ -59,13 +63,4 @@ Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');
 Route::fallback(function(){
     echo 'Rota acessada inexistente. <a href="'.route('chamado.login').'">clique aqui</a>
     para ir para a rota inicial';
-});
-
-//teste session
-Route::get('home', function (Request $request) {
-    session_start();
-    if ($request->session()->has($_SESSION)) {
-        echo 'existe';
-        print_r($_SESSION);
-    }
 });
