@@ -44,7 +44,7 @@
                                                 echo $dados = 'Aberto';
                                             } elseif ($dados_chamado->status == '2') {
                                                 echo $dados = 'Concluido';
-                                            } else{
+                                            } else {
                                                 echo $dados = 'Não-atribuido';
                                             }
                                         @endphp</option>
@@ -154,7 +154,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <form action="{{ route('chamado.tecnico.atribuir', ['idchamado' => $dados_chamado->id]) }}"
-                    method="POST">
+                    method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="modal-header">
@@ -204,7 +204,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <form action="{{ route('chamado.tecnico.status', ['idchamado' => $dados_chamado->id]) }}"
-                    method="POST">
+                    method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="modal-header">
@@ -238,3 +238,27 @@
     </div>
     <!--FIM MODAL ALTERAR STATUS-->
 @endforeach
+
+<!--MODAL TIPO ERRO-->
+<form action="{{ route('chamado.tipoerro') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="modal fade" id="tipoerro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Cadastrar Categoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>Informe a categoria</h5>
+                    <input required type="text" class="form-control mb-4" title="Cadastrar categoria" name="tipo_erro" value="{{ old('tipo_erro') }}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--FIM MODAL TIPO ERRO-->

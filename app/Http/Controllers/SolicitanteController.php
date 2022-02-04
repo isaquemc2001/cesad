@@ -30,8 +30,11 @@ class SolicitanteController extends Controller
         if(isset($solicitante)){
             $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
         }
+        $cadastrado = '';
+        $editado = '';
+        $excluido = '';
 
-        return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario]);
+        return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido]);
     }
 
     public function em_aberto(){
@@ -44,6 +47,8 @@ class SolicitanteController extends Controller
 
         //pegando valor para quem foi o solicitante
         $solicitante = DB::table('app_chamados')->select('solicitante_id')->where('solicitante_id', $usuario)->get()->first();
+
+        $dados_usuario = '';
 
         if(isset($solicitante)){
             $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
@@ -62,6 +67,8 @@ class SolicitanteController extends Controller
 
        //pegando valor para quem foi o solicitante
        $solicitante = DB::table('app_chamados')->select('solicitante_id')->where('solicitante_id', $usuario)->get()->first();
+
+       $dados_usuario = '';
 
        if(isset($solicitante)){
            $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
@@ -104,12 +111,30 @@ class SolicitanteController extends Controller
 
         $chamado->save();
 
+        //filtragem dos chamados de quem está acessando
+        $usuario = 	$_SESSION['idusuario'];
+
+        $dados_chamado = AppChamado::all()->where('solicitante_id', $usuario);
+
+        //mostrando nome do solicitante
+        $dados_usuario = '';
+
+        $solicitante = DB::table('app_chamados')->select('solicitante_id')->where('solicitante_id', $usuario)->get()->first();
+
+        if(isset($solicitante)){
+            $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
+        }
+
+        $cadastrado = '';
+        $editado = '';
+        $excluido = '';
+
         if ($chamado) {
-            echo "<script> alert('O Chamado Cadastrado Com Sucesso')</script>";
-            return redirect()->route('chamado.solicitante', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado]);
+            $cadastrado = '1';
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido]);
         } else {
-            echo "<script> alert('O Chamado Não Cadastrado')</script>";
-            return redirect()->route('chamado.solicitante', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado]);
+            $cadastrado = '2';
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido]);
         }
 
     }
@@ -123,14 +148,31 @@ class SolicitanteController extends Controller
 
         $idchamado->update($request->all());
 
-        if ($idchamado) {
-            echo "<script> alert('Alteração realizada com sucesso')</script>";
-        } else {
-            echo "<script> alert('Alteração não realizada')</script>";
+        $cadastrado = '';
+        $editado = '';
+        $excluido = '';
+
+        //filtragem dos chamados de quem está acessando
+        $usuario = 	$_SESSION['idusuario'];
+
+        $dados_chamado = AppChamado::all()->where('solicitante_id', $usuario);
+
+        //mostrando nome do solicitante
+        $dados_usuario = '';
+
+        $solicitante = DB::table('app_chamados')->select('solicitante_id')->where('solicitante_id', $usuario)->get()->first();
+
+        if(isset($solicitante)){
+            $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
         }
 
-        return redirect()->route('chamado.solicitante', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado]);
-
+        if ($idchamado) {
+            $editado = '1';
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido]);
+        } else {
+            $editado = '2';
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido]);
+        }
     }
 
     public function destroy(AppChamado $idchamado){
@@ -141,12 +183,30 @@ class SolicitanteController extends Controller
 
         $idchamado->delete();
 
+        $cadastrado = '';
+        $editado = '';
+        $excluido = '';
+
+        //filtragem dos chamados de quem está acessando
+        $usuario = 	$_SESSION['idusuario'];
+
+        $dados_chamado = AppChamado::all()->where('solicitante_id', $usuario);
+
+        //mostrando nome do solicitante
+        $dados_usuario = '';
+
+        $solicitante = DB::table('app_chamados')->select('solicitante_id')->where('solicitante_id', $usuario)->get()->first();
+
+        if(isset($solicitante)){
+            $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
+        }
+
         if ($idchamado) {
-            echo "<script> alert('Exclusão realizada com sucesso')</script>";
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado]);
+            $excluido = '1';
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido]);
         } else {
-            echo "<script> alert('Exclusão não realizada')</script>";
-            return redirect()->route('chamado.solicitante', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado]);
+            $excluido = '2';
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido]);
         }
     }
 }

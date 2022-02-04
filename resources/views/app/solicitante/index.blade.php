@@ -57,7 +57,7 @@
                         <div class="row">
                             <div class="col">
                                 <h5>Título</h5>
-                                <input type="text" class="form-control mb-4" name="Titulo" value={{ old('Titulo') }}>
+                                <input required type="text" class="form-control mb-4" name="Titulo" value={{ old('Titulo') }}>
 
                                 @include('app.layouts._partials.solicitante.tipo_erro')
 
@@ -67,7 +67,7 @@
                             </div>
                             <div class="col">
                                 <h5>Descrição</h5>
-                                <textarea class="form-control" id="textarea-disabled" rows="14"
+                                <textarea required class="form-control" id="textarea-disabled" rows="14"
                                     name="Descricao">@if (old('Descricao') != ''){{ old('Descricao') }}@endif</textarea>
                             </div>
 

@@ -44,6 +44,21 @@
 
     <!--INICIO GRID DOS CHAMADOS-->
     <div class="container">
+        <!--AVISO DE ATRIBUIÇÃO-->
+        <div class="alert alert-success mt-3" <?php if($atribuicao == '1'){ }else {echo 'hidden';} ?> role="alert">
+            Chamado Atribuido com Sucesso!
+        </div>
+        <div class="alert alert-danger mt-3" <?php if($atribuicao == '2'){ }else {echo 'hidden';} ?> role="alert">
+            Chamado não Atribuido!
+        </div>
+
+        <!--AVISO DE CADASTRO-->
+        <div class="alert alert-success mt-3" <?php if($status_alterado == '1'){ }else {echo 'hidden';} ?> role="alert">
+            Status do Chamado Alterado com Sucesso!
+        </div>
+        <div class="alert alert-danger mt-3" <?php if($status_alterado == '2'){ }else {echo 'hidden';} ?> role="alert">
+            Status do Chamado não Alterado!
+        </div>
         <div class="row">
             <div class="col-6 col-xxl-10">
                 <h1 class="titulos-pag">Chamados</h1>
@@ -58,11 +73,11 @@
 
                     <thead>
                         <tr>
-                            <th class="th-titulo-tec">Título</th>
-                            <th class="th-categoria-tec">Categoria</th>
-                            <th class="th-status-tec">Status</th>
-                            <th class="th-descricao-tec">Descrição</th>
-                            <th class="th-acoes-tec">Ações</th>
+                            <th class="th-titulo">Título</th>
+                            <th class="th-categoria">Categoria</th>
+                            <th class="th-status">Status</th>
+                            <th class="th-descricao">Descrição</th>
+                            <th class="th-acoes">Ações</th>
                             <th hidden>data-abertura</th>
                         </tr>
                     </thead>
@@ -107,7 +122,7 @@
                                     <div class="btn-table btn badge bg-warning ml-2" data-bs-toggle="modal"
                                         data-bs-target="#atribuir-chamado{{ $dados_chamado->id }}">Atribuir</div>
                                     <div class="btn-table btn badge bg-success ml-2" data-bs-toggle="modal"
-                                        data-bs-target="#alterar-status{{ $dados_chamado->id }}">Alterar Status</div>
+                                        data-bs-target="#alterar-status{{ $dados_chamado->id }}" @if ($dados_chamado->status == '3'){ hidden }  @endif>Alterar Status</div>
                                 </td>
 
                                 <td hidden>{{ $dados_chamado->data_abertura }}</td>

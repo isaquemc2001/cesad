@@ -1,6 +1,30 @@
 <!--INICIO GRID DOS CHAMADOS-->
 <div class="container">
     <div class="row">
+        <!--AVISO DE CADASTRO-->
+        <div class="alert alert-success mt-3" <?php if($cadastrado == '1'){ }else {echo 'hidden';} ?> role="alert">
+            Chamado Cadastrado com Sucesso!
+        </div>
+        <div class="alert alert-danger mt-3" <?php if($cadastrado == '2'){ }else {echo 'hidden';} ?> role="alert">
+            Chamado não Cadastrado!
+        </div>
+
+        <!--AVISO DE CADASTRO-->
+        <div class="alert alert-success mt-3" <?php if($editado == '1'){ }else {echo 'hidden';} ?> role="alert">
+            Chamado Alterado com Sucesso!
+        </div>
+        <div class="alert alert-danger mt-3" <?php if($editado == '2'){ }else {echo 'hidden';} ?> role="alert">
+            Chamado não Alterado!
+        </div>
+
+        <!--AVISO DE EXCLUSÃO-->
+        <div class="alert alert-success mt-3" <?php if($excluido == '1'){ }else {echo 'hidden';} ?> role="alert">
+            Chamado Excluido com Sucesso!
+        </div>
+        <div class="alert alert-danger mt-3" <?php if($excluido == '2'){ }else {echo 'hidden';} ?> role="alert">
+            Chamado não Excluido!
+        </div>
+
         <div class="col-6 col-xxl-10">
             <h1 class="titulos-pag">Meus Chamados</h1>
         </div>
@@ -54,26 +78,29 @@
                                     }
                                 @endphp
                             </td>
-                            <td>@if ($dados_chamado->status == "1")
-                                Em aberto
-                            @else
-                                Concluido
-                            @endif</td>
+                            <td>
+                                @if ($dados_chamado->status == '1')
+                                    Em aberto
+                                @else
+                                    Concluido
+                                @endif
+                            </td>
                             <td style="white-space: normal">{{ $dados_chamado->descricao }}</td>
                             <td>
                                 <div class="btn-table btn badge bg-primary" data-bs-toggle="modal"
                                     data-bs-target="#visualizar-chamado{{ $dados_chamado->id }}">Visualizar</div>
                                 <div class="btn-table btn badge bg-warning ml-2" data-bs-toggle="modal"
-                                    data-bs-target="#editar-chamado{{ $dados_chamado->id }}"@if($dados_chamado->status == '2'){ hidden }  @endif>Editar</div>
-                                <div class="btn-table">
-                                    <form
-                                        action="{{ route('chamado.solicitante.destroy', ['idchamado' => $dados_chamado->id]) }}"
-                                        method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn-table btn badge bg-danger ml-2">Excluir</button>
-                                    </form>
-                                </div>
+                                    data-bs-target="#editar-chamado{{ $dados_chamado->id }}" @if ($dados_chamado->status == '2'){ hidden }  @endif>
+                                    Editar</div>
+
+                                <form
+                                    action="{{ route('chamado.solicitante.destroy', ['idchamado' => $dados_chamado->id]) }}"
+                                    method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn-table btn badge bg-danger ml-2">Excluir</button>
+                                </form>
+
                             </td>
                             <td hidden>{{ $dados_chamado->data_abertura }}</td>
                         </tr>

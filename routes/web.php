@@ -38,27 +38,23 @@ Route::middleware('autenticacao: padrao')->prefix('/chamado')->group(function ()
 
     //Route Técnico
     Route::get('/tecnico', 'TecnicoController@tecnico')->name('chamado.tecnico');
-    Route::put('/tecnico/update/{idchamado}', 'TecnicoController@atribuir')->name('chamado.tecnico.atribuir');
+    Route::put('/tecnico/atribuir/{idchamado}', 'TecnicoController@atribuir')->name('chamado.tecnico.atribuir');
     Route::put('/tecnico/status/{idchamado}', 'TecnicoController@status')->name('chamado.tecnico.status');
     Route::get('/meuschamados', 'TecnicoController@meuschamados')->name('chamado.meuschamados');
+    Route::post('/tipoerro', 'TecnicoController@tipoerro')->name('chamado.tipoerro');
 
     //SAIR
-    Route::get('/sair', 'LoginController@logout')->name('chamado.sair');
+    Route::get('/sair' , 'LoginController@logout')->name('chamado.sair');
 
     //Route Solicitante
     Route::get('/solicitante', 'SolicitanteController@solicitante')->name('chamado.solicitante');
     Route::post('/solicitante', 'SolicitanteController@cadastrar_chamado')->name('chamado.solicitante');
-    Route::put('/solicitante/update/{idchamado}', 'SolicitanteController@update')->name('chamado.solicitante.update');
-    Route::delete('/solicitante/destroy/{idchamado}', 'SolicitanteController@destroy')->name('chamado.solicitante.destroy');
+    Route::put('/{idchamado}', 'SolicitanteController@update')->name('chamado.solicitante.update');
+    Route::delete('/{idchamado}', 'SolicitanteController@destroy')->name('chamado.solicitante.destroy');
 
     Route::get('/aberto', 'SolicitanteController@em_aberto')->name('chamado.solicitante.em_aberto');
     Route::get('/concluido', 'SolicitanteController@concluido')->name('chamado.solicitante.concluido');
 });
-
-
-//exemplo da aula
-Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');
-
 
 Route::fallback(function(){
     echo 'Rota acessada inexistente. <a href="'.route('chamado.login').'">clique aqui</a>

@@ -16,11 +16,12 @@ class CreateAppChamadosTable extends Migration
         Schema::create('app_chamados', function (Blueprint $table) {
             $table->id();
             $table->integer('solicitante_id');
-            $table->integer('tecnico_id');
+            $table->integer('tecnico_id')->nullable();
             $table->string('titulo', 100);
             $table->integer('tipo_erro');
             $table->string('anexo', 100)->nullable();
             $table->text('descricao');
+            $table->text('resposta')->nullable();
             $table->date('data_abertura');
             $table->date('data_alteracao');
             $table->integer('status');
@@ -28,6 +29,8 @@ class CreateAppChamadosTable extends Migration
             $table->integer('tecnico_atribuido')->nullable();
             $table->timestamps();
 
+            $table->foreign('tecnico_id')->references('idusuario')->on('usuario');
+            $table->foreign('solicitante_id')->references('idusuario')->on('usuario');
             //foreign key
             //$table->foreign('solicitante_id')->references('id_solicitante')->on('dado_solicitante');
         });

@@ -33,10 +33,17 @@ $letra[0][0];
                             </a>
                         </li>
                         <li>
-                            <a href="meuschamados" class="nav-link @if($titulo == "Meus chamados"){ active }  @endif py-3 border-bottom" title="Seus Chamados"
+                            <a href="/chamado/meuschamados" class="nav-link @if($titulo == "Meus chamados"){ active }  @endif py-3 border-bottom" title="Seus Chamados"
                                 data-bs-toggle="tooltip" data-bs-placement="right">
                                 <svg class="bi" width="24" height="24" role="img" aria-label="Chamados">
                                     <use xlink:href="#table" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link py-3 border-bottom" data-bs-toggle="modal" data-bs-target="#tipoerro">
+                                <svg class="bi" width="24" height="24" role="img" aria-label="Products">
+                                    <use xlink:href="#new" />
                                 </svg>
                             </a>
                         </li>
@@ -100,6 +107,13 @@ $letra[0][0];
                 data-bs-placement="right">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Chamados">
                     <use xlink:href="#table" />
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a class="nav-link py-3 border-bottom" data-bs-toggle="modal" data-bs-target="#tipoerro">
+                <svg class="bi" width="24" height="24" role="img" aria-label="Products">
+                    <use xlink:href="#new" />
                 </svg>
             </a>
         </li>

@@ -57,11 +57,11 @@
 
                     <thead>
                         <tr>
-                            <th class="th-titulo-tec">Título</th>
-                            <th class="th-categoria-tec">Categoria</th>
-                            <th class="th-status-tec">Status</th>
-                            <th class="th-descricao-tec">Descrição</th>
-                            <th class="th-acoes-tec">Ações</th>
+                            <th class="th-titulo">Título</th>
+                            <th class="th-categoria">Categoria</th>
+                            <th class="th-status">Status</th>
+                            <th class="th-descricao">Descrição</th>
+                            <th class="th-acoes">Ações</th>
                             <th hidden>data-abertura</th>
                         </tr>
                     </thead>
@@ -121,77 +121,4 @@
     </div>
     <!--FIM GRID DOS CHAMADOS-->
     </div>
-
-    <!--MODAL ATRIBUIR-->
-    <div class="modal fade" id="atribuir-chamado" data-bs-backdrop="static" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Atribuição de Chamado</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <h6>Selecione o Técnico</h6>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Selecione</option>
-                                    <option value="1">Isaque Matos Conceição</option>
-                                    <option value="2">João Victor dos Santos Oliveira</option>
-                                    <option value="3">Matheus </option>
-                                </select>
-                            </div>
-                            <div class="col">
-                                <h6>Selecione a Prioridade</h6>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Selecione</option>
-                                    <option value="1">Baixa</option>
-                                    <option value="2">Normal</option>
-                                    <option value="3">Alta</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-success">Salvar Alterações</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--FIM MODAL ATRIBUIR-->
-
-    <!--MODAL ALTERAR STATUS-->
-    <div class="modal fade" id="alterar-status" data-bs-backdrop="static" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Atualização de Status do Chamado - </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="col">
-                        <h6>Selecione o Status do Chamado</h6>
-                        <select class="form-select mb-4" aria-label="Default select example">
-                            <option selected>Aberto</option>
-                            <option value="1">Concluido</option>
-                            <option value="2">Não-Atribuido</option>
-                        </select>
-
-                        <h6>Informe a Descrição da Atualização</h6>
-                        <textarea class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-success">Salvar Alterações</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--FIM MODAL ALTERAR STATUS-->
 @endsection
