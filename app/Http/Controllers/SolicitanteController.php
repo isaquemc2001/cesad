@@ -181,6 +181,8 @@ class SolicitanteController extends Controller
 
         $dados_chamado = AppChamado::all();
 
+        unlink(public_path('images/anexos/'.$idchamado->anexo));
+
         $idchamado->delete();
 
         $cadastrado = '';
