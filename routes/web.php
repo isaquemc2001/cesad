@@ -56,6 +56,10 @@ Route::middleware('autenticacao: padrao')->prefix('/chamado')->group(function ()
     Route::get('/concluido', 'SolicitanteController@concluido')->name('chamado.solicitante.concluido');
 });
 
+Route::get('/novochamado', function(){
+    return view('app.solicitante.mail.novo_chamado');
+});
+
 Route::fallback(function(){
     echo 'Rota acessada inexistente. <a href="'.route('chamado.login').'">clique aqui</a>
     para ir para a rota inicial';

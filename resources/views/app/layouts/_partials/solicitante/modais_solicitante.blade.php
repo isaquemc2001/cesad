@@ -194,8 +194,10 @@
                                 </select>
 
                                 <h5>Anexo</h5>
-                                <input class="form-control" id="" type="file" name="anexo"
-                                    value="{{ $dados_chamado->anexo }}">
+                                <input class="form-control" type="file" name="anexo"
+                                    value="">
+
+                                <img src="/images/anexos/{{ $dados_chamado->anexo}}" alt="{{ $dados_chamado->anexo}}" class="imagem_alterar">
 
                             </div>
                             <div class="col">

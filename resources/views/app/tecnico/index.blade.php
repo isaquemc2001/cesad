@@ -125,7 +125,7 @@
                                         data-bs-target="#alterar-status{{ $dados_chamado->id }}" @if ($dados_chamado->status == '3'){ hidden }  @endif>Alterar Status</div>
                                 </td>
 
-                                <td hidden>{{ $dados_chamado->data_abertura }}</td>
+                                <td hidden>{{ $dados_chamado->created_at }}</td>
                             </tr>
                         @endforeach
                     </tbody>

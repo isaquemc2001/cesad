@@ -108,7 +108,7 @@
                                     <div class="btn-table btn badge bg-success ml-2" data-bs-toggle="modal"
                                         data-bs-target="#alterar-status{{ $dados_chamado->id }}">Alterar Status</div>
                                 </td>
-                                <td hidden>{{ $dados_chamado->data_abertura }}</td>
+                                <td hidden>{{ $dados_chamado->created_at }}</td>
                             </tr>
                         @endforeach
                     </tbody>

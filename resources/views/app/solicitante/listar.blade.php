@@ -98,11 +98,11 @@
                                     method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <button type="submit" class="btn-table btn badge bg-danger ml-2">Excluir</button>
+                                    <button type="submit" class="btn-table btn badge bg-danger">Excluir</button>
                                 </form>
 
                             </td>
-                            <td hidden>{{ $dados_chamado->data_abertura }}</td>
+                            <td hidden>{{ $dados_chamado->created_at }}</td>
                         </tr>
                     @endforeach
                 </tbody>

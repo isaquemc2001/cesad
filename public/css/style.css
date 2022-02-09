@@ -61,6 +61,12 @@ nav {
     margin-right: 50px;
 }
 
+.imagem_alterar{
+    width: 50%;
+    aspect-ratio: 6 / 4;
+    margin-top: 12px;
+}
+
 /*style responsivo do side bar*/
 
 @media (max-width: 999px) {

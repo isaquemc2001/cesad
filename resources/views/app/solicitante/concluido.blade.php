@@ -118,7 +118,7 @@
                                     </form>
                                 </div>
                             </td>
-                            <td hidden>{{ $dados_chamado->data_abertura }}</td>
+                            <td hidden>{{ $dados_chamado->created_at }}</td>
                         </tr>
                     @endforeach
                 </tbody>
