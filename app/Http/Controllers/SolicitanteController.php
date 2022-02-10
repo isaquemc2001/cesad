@@ -153,7 +153,6 @@ class SolicitanteController extends Controller
 
     public function update(Request $request, AppChamado $idchamado)
     {
-
         $tipo_erro = TipoErro::all();
 
         $dados_chamado = AppChamado::all();
@@ -216,8 +215,6 @@ class SolicitanteController extends Controller
 
         $dados_chamado = AppChamado::all();
 
-
-
         $idchamado->delete();
 
         $cadastrado = '';
@@ -225,7 +222,7 @@ class SolicitanteController extends Controller
         $excluido = '';
 
         //filtragem dos chamados de quem está acessando
-        $usuario =     $_SESSION['idusuario'];
+        $usuario = $_SESSION['idusuario'];
 
         $dados_chamado = AppChamado::all()->where('solicitante_id', $usuario);
 
@@ -251,4 +248,5 @@ class SolicitanteController extends Controller
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido]);
         }
     }
+
 }

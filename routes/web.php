@@ -51,6 +51,7 @@ Route::middleware('autenticacao: padrao')->prefix('/chamado')->group(function ()
     Route::post('/solicitante', 'SolicitanteController@cadastrar_chamado')->name('chamado.solicitante');
     Route::put('/{idchamado}', 'SolicitanteController@update')->name('chamado.solicitante.update');
     Route::delete('/{idchamado}', 'SolicitanteController@destroy')->name('chamado.solicitante.destroy');
+    Route::get('/form_excluir', 'SolicitanteController@form_excluir')->name('chamado.solicitante.form_excluir');
 
     Route::get('/aberto', 'SolicitanteController@em_aberto')->name('chamado.solicitante.em_aberto');
     Route::get('/concluido', 'SolicitanteController@concluido')->name('chamado.solicitante.concluido');

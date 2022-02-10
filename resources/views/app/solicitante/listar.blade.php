@@ -2,26 +2,44 @@
 <div class="container">
     <div class="row">
         <!--AVISO DE CADASTRO-->
-        <div class="alert alert-success mt-3" <?php if($cadastrado == '1'){ }else {echo 'hidden';} ?> role="alert">
+        <div class="alert alert-success mt-3" <?php if ($cadastrado == '1') {
+} else {
+    echo 'hidden';
+} ?> role="alert">
             Chamado Cadastrado com Sucesso!
         </div>
-        <div class="alert alert-danger mt-3" <?php if($cadastrado == '2'){ }else {echo 'hidden';} ?> role="alert">
+        <div class="alert alert-danger mt-3" <?php if ($cadastrado == '2') {
+} else {
+    echo 'hidden';
+} ?> role="alert">
             Chamado não Cadastrado!
         </div>
 
         <!--AVISO DE CADASTRO-->
-        <div class="alert alert-success mt-3" <?php if($editado == '1'){ }else {echo 'hidden';} ?> role="alert">
+        <div class="alert alert-success mt-3" <?php if ($editado == '1') {
+} else {
+    echo 'hidden';
+} ?> role="alert">
             Chamado Alterado com Sucesso!
         </div>
-        <div class="alert alert-danger mt-3" <?php if($editado == '2'){ }else {echo 'hidden';} ?> role="alert">
+        <div class="alert alert-danger mt-3" <?php if ($editado == '2') {
+} else {
+    echo 'hidden';
+} ?> role="alert">
             Chamado não Alterado!
         </div>
 
         <!--AVISO DE EXCLUSÃO-->
-        <div class="alert alert-success mt-3" <?php if($excluido == '1'){ }else {echo 'hidden';} ?> role="alert">
+        <div class="alert alert-success mt-3" <?php if ($excluido == '1') {
+} else {
+    echo 'hidden';
+} ?> role="alert">
             Chamado Excluido com Sucesso!
         </div>
-        <div class="alert alert-danger mt-3" <?php if($excluido == '2'){ }else {echo 'hidden';} ?> role="alert">
+        <div class="alert alert-danger mt-3" <?php if ($excluido == '2') {
+} else {
+    echo 'hidden';
+} ?> role="alert">
             Chamado não Excluido!
         </div>
 
@@ -100,7 +118,6 @@
                                     @csrf
                                     <button type="submit" class="btn-table btn badge bg-danger">Excluir</button>
                                 </form>
-
                             </td>
                             <td hidden>{{ $dados_chamado->created_at }}</td>
                         </tr>
