@@ -136,11 +136,7 @@ class SolicitanteController extends Controller
 
         if ($chamado) {
             $cadastrado = '1';
-            //enviando email
-            Mail::send('app.solicitante.mail.novo_chamado', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                $message->from('jennifercater09@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                $message->to($_SESSION['email']);
-            });
+
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido]);
         } else {
             $cadastrado = '2';

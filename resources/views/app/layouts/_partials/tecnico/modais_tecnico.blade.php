@@ -29,7 +29,7 @@
                                             $tecnico_atribuido = '';
                                         }
                                     @endphp
-                                    <input type="text" class="form-control mb-4" value=""
+                                    <input type="text" class="form-control mb-4" value="{{ $tecnico_atribuido }}"
                                         disabled>
                                 </div>
                                 @include('app.layouts._partials.tecnico.solicitante')

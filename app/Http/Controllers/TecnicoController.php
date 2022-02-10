@@ -38,7 +38,9 @@ class TecnicoController extends Controller
             $dados_chamado = AppChamado::all()->where('tecnico_atribuido', "0");
         }
 
-        return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado]);
+        $usuario = AppChamado::with('usuario')->get();
+
+        return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario]);
     }
 
     public function atribuir(Request $request, AppChamado $idchamado){
