@@ -16,7 +16,9 @@ class TecnicoController extends Controller
 
         $dados_chamado = AppChamado::all()->where('tecnico_atribuido', NULL);
 
-        return view('app.tecnico.index', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado]);
+        $usuario = AppChamado::with('usuario')->get();
+
+        return view('app.tecnico.index', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
     }
 
     public function meuschamados(){

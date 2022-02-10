@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Console\Scheduling\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\AppChamado;
-use App\Solicitante;
 use App\TipoErro;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Mail;
-use League\CommonMark\Extension\Table\Table;
-use PHPMailer\PHPMailer\PHPMailer;
 
 class SolicitanteController extends Controller
 {
@@ -21,7 +16,7 @@ class SolicitanteController extends Controller
         $tipo_erro = TipoErro::all();
 
         //filtragem dos chamados de quem está acessando
-        $usuario =     $_SESSION['idusuario'];
+        $usuario = $_SESSION['idusuario'];
 
         $dados_chamado = AppChamado::all()->where('solicitante_id', $usuario);
 
@@ -37,7 +32,9 @@ class SolicitanteController extends Controller
         $editado = '';
         $excluido = '';
 
-        return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido]);
+        $usuario = AppChamado::with('usuario')->get();
+
+        return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario]);
     }
 
     public function em_aberto()
