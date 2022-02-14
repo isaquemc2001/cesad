@@ -52,12 +52,14 @@ class TecnicoController extends Controller
         $atribuicao = '';
         $status_alterado = '';
 
+        $usuario = AppChamado::with('usuario')->get();
+
         if ($idchamado) {
             $atribuicao = '1';
-            return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado]);
+            return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
         } else {
             $atribuicao = '2';
-            return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado]);
+            return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
         }
 
     }
@@ -71,12 +73,14 @@ class TecnicoController extends Controller
         $atribuicao = '';
         $status_alterado = '';
 
+        $usuario = AppChamado::with('usuario')->get();
+
         if ($idchamado) {
             $status_alterado = '1';
-            return redirect()->route('chamado.meuschamados', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado]);
+            return redirect()->route('chamado.meuschamados', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
         } else {
             $status_alterado = '2';
-            return redirect()->route('chamado.meuschamados', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado]);
+            return redirect()->route('chamado.meuschamados', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
         }
     }
 
@@ -93,7 +97,9 @@ class TecnicoController extends Controller
 
         $tipoerro->save();
 
-        return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado]);
+        $usuario = AppChamado::with('usuario')->get();
+
+        return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
     }
 
 }

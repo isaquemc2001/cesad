@@ -51,11 +51,13 @@ class SolicitanteController extends Controller
 
         $dados_usuario = '';
 
+        $usuario = AppChamado::with('usuario')->get();
+
         if (isset($solicitante)) {
             $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
         }
 
-        return view('app.solicitante.em_aberto', ['titulo' => 'Chamados em Aberto', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario]);
+        return view('app.solicitante.em_aberto', ['titulo' => 'Chamados em Aberto', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'usuario' => $usuario]);
     }
 
     public function concluido()
@@ -72,11 +74,13 @@ class SolicitanteController extends Controller
 
         $dados_usuario = '';
 
+        $usuario = AppChamado::with('usuario')->get();
+
         if (isset($solicitante)) {
             $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
         }
 
-        return view('app.solicitante.concluido', ['titulo' => 'Chamados Concluidos', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario]);
+        return view('app.solicitante.concluido', ['titulo' => 'Chamados Concluidos', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'usuario' => $usuario]);
     }
 
     public function cadastrar_chamado(Request $request)
@@ -114,8 +118,6 @@ class SolicitanteController extends Controller
 
         $chamado->save();
 
-
-
         //filtragem dos chamados de quem está acessando
         $usuario =     $_SESSION['idusuario'];
 
@@ -134,13 +136,19 @@ class SolicitanteController extends Controller
         $editado = '';
         $excluido = '';
 
+        $usuario = AppChamado::with('usuario')->get();
+
         if ($chamado) {
             $cadastrado = '1';
-
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido]);
+            /*
+            Mail::send('app.solicitante.mail.novo_chamado', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+                $message->from('jennifercater09@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+                $message->to($_SESSION['email']);
+            });*/
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario]);
         } else {
             $cadastrado = '2';
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido]);
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario]);
         }
     }
 
@@ -154,7 +162,9 @@ class SolicitanteController extends Controller
 
         if ($request->hasFile('anexo') && $request->file('anexo')->isValid()) {
 
-            unlink(public_path('images/anexos/'.$idchamado->anexo));
+            if($idchamado->anexo){
+                unlink(public_path('images/anexos/'.$idchamado->anexo));
+            }
 
             $requestImage = $request->file('anexo');
 
@@ -187,17 +197,20 @@ class SolicitanteController extends Controller
             $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
         }
 
+        $usuario = AppChamado::with('usuario')->get();
+
         if ($idchamado) {
             $editado = '1';
             //enviando email
+            /*
             Mail::send('app.solicitante.mail.nova_edicao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('jennifercater09@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
-            });
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido]);
+            });*/
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario]);
         } else {
             $editado = '2';
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido]);
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario]);
         }
     }
 
@@ -207,6 +220,10 @@ class SolicitanteController extends Controller
         $tipo_erro = TipoErro::all();
 
         $dados_chamado = AppChamado::all();
+
+        if($idchamado->anexo){
+            unlink(public_path('images/anexos/'.$idchamado->anexo));
+        }
 
         $idchamado->delete();
 
@@ -228,17 +245,20 @@ class SolicitanteController extends Controller
             $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
         }
 
+        $usuario = AppChamado::with('usuario')->get();
+
         if ($idchamado) {
             $excluido = '1';
             //enviando email
+            /*
             Mail::send('app.solicitante.mail.exclusao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('jennifercater09@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
-            });
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido]);
+            });*/
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario]);
         } else {
             $excluido = '2';
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido]);
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario]);
         }
     }
 

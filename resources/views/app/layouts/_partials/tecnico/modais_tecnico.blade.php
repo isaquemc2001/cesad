@@ -26,13 +26,16 @@
                                         } elseif ($dados_chamado->tecnico_atribuido == '3') {
                                             $tecnico_atribuido = 'Matheus Andrade';
                                         } else {
-                                            $tecnico_atribuido = '';
+                                            $tecnico_atribuido = 'Pendente';
                                         }
                                     @endphp
                                     <input type="text" class="form-control mb-4" value="{{ $tecnico_atribuido }}"
                                         disabled>
                                 </div>
-                                @include('app.layouts._partials.tecnico.solicitante')
+                                <div class="col-12 col-sm-6">
+                                    <h5>Nome do Solicitante</h5>
+                                    <input type="text" class="form-control mb-4" value="{{ $dados_chamado->usuario->nome }}" disabled>
+                                </div>
                             </div>
 
                             <div class="row">

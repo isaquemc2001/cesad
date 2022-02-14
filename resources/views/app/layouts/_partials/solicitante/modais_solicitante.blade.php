@@ -33,7 +33,10 @@
                                     <input type="text" class="form-control mb-4"
                                         value="@php echo $tecnico @endphp" disabled>
                                 </div>
-                                @include('app.layouts._partials.solicitante.nome_solicitante')
+                                <div class="col-12 col-sm-6">
+                                    <h5>Nome do Solicitante</h5>
+                                    <input type="text" class="form-control mb-4" value="{{ $dados_chamado->usuario->nome }}" disabled>
+                                </div>
                             </div>
 
                             <div class="row">
