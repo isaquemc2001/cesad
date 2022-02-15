@@ -17,24 +17,12 @@
 
                             <div class="row">
                                 <div class="col-12 col-sm-6">
-                                    <h5>Nome do Técnico</h5>
-                                    @php
-                                        if ($dados_chamado->tecnico_atribuido == '1') {
-                                            $tecnico_atribuido = 'Isaque Matos Conceição';
-                                        } elseif ($dados_chamado->tecnico_atribuido == '2') {
-                                            $tecnico_atribuido = 'João Victor dos Santos Oliveira';
-                                        } elseif ($dados_chamado->tecnico_atribuido == '3') {
-                                            $tecnico_atribuido = 'Matheus Andrade';
-                                        } else {
-                                            $tecnico_atribuido = 'Pendente';
-                                        }
-                                    @endphp
-                                    <input type="text" class="form-control mb-4" value="{{ $tecnico_atribuido }}"
-                                        disabled>
+                                    @include('app.layouts._partials.tecnico.nome_tecnico')
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <h5>Nome do Solicitante</h5>
-                                    <input type="text" class="form-control mb-4" value="{{ $dados_chamado->usuario->nome }}" disabled>
+                                    <input type="text" class="form-control mb-4"
+                                        value="{{ $dados_chamado->usuario->nome }}" disabled>
                                 </div>
                             </div>
 
@@ -170,13 +158,7 @@
                         <div class="col">
                             <div class="row">
                                 <div class="col">
-                                    <h6>Selecione o Técnico</h6>
-                                    <select class="form-select" name="tecnico_atribuido">
-                                        <option value="0" selected>Selecione</option>
-                                        <option value="1">Isaque Matos Conceição</option>
-                                        <option value="2">João Victor dos Santos Oliveira</option>
-                                        <option value="3">Matheus Andrade</option>
-                                    </select>
+                                    @include('app.layouts._partials.tecnico.select_tecnico')
                                 </div>
                                 <div class="col">
                                     <h6>Selecione a Prioridade</h6>
@@ -254,7 +236,8 @@
                 </div>
                 <div class="modal-body">
                     <h5>Informe a categoria</h5>
-                    <input required type="text" class="form-control mb-4" title="Cadastrar categoria" name="tipo_erro" value="{{ old('tipo_erro') }}">
+                    <input required type="text" class="form-control mb-4" title="Cadastrar categoria" name="tipo_erro"
+                        value="{{ old('tipo_erro') }}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

@@ -16,22 +16,7 @@
 
                             <div class="row">
                                 <div class="col-12 col-sm-6">
-
-                                    @php
-                                        if ($dados_chamado->tecnico_atribuido == '1') {
-                                            $tecnico = "Isaque Matos Conceição";
-                                        } elseif ($dados_chamado->tecnico_atribuido == '2') {
-                                            $tecnico = "João Victor dos Santos Oliveira";
-                                        } elseif ($dados_chamado->tecnico_atribuido == '3') {
-                                            $tecnico = "Matheus Andrade";
-                                        }else {
-                                            $tecnico = "Pendente";
-                                        }
-                                    @endphp
-
-                                    <h5>Nome do Técnico</h5>
-                                    <input type="text" class="form-control mb-4"
-                                        value="@php echo $tecnico @endphp" disabled>
+                                    @include('app.layouts._partials.solicitante.nome_solicitante')
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <h5>Nome do Solicitante</h5>

@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\AppChamado;
 use App\TipoErro;
-use Illuminate\Support\Facades\DB;
-use App\Usuaria;
+use App\Usuario;
 
 class TecnicoController extends Controller
 {
@@ -14,36 +13,41 @@ class TecnicoController extends Controller
         $atribuicao = '';
         $status_alterado = '';
 
-        $dados_chamado = AppChamado::all()->where('tecnico_atribuido', NULL);
+        //select tecnico
+        $tecnico = Usuario::all();
+
+        $dados_chamado = AppChamado::all()->where('tecnico_id', 1);
 
         $usuario = AppChamado::with('usuario')->get();
 
-        return view('app.tecnico.index', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
+        return view('app.tecnico.index', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico]);
     }
 
     public function meuschamados(){
+        //select tecnico
+        $tecnico = Usuario::all();
+
+        $tec = Usuario::all();
 
         //mostra tecnico atribuido
         $cpfacesso = $_SESSION['cpf'];
 
-        $cpfbanco = DB::table('usuario')->select('cpf')->where('cpf', $cpfacesso)->get()->first();
-
-        if($cpfbanco->cpf == "08041299598"){
-            $dados_chamado = AppChamado::all()->where('tecnico_atribuido', "1");
-        }else if($cpfbanco->cpf == "01326881582"){
-            $dados_chamado = AppChamado::all()->where('tecnico_atribuido', "2");
-        }else if($cpfbanco->cpf == "00773520503"){
-            $dados_chamado = AppChamado::all()->where('tecnico_atribuido', "3");
-        }else{
-            $dados_chamado = AppChamado::all()->where('tecnico_atribuido', "0");
+        foreach($tec as $key => $tec){
+            if($cpfacesso == $tec->cpf){
+                $idusuario = $tec->idusuario;
+            }
         }
+
+        $dados_chamado = AppChamado::all()->where('tecnico_id', $idusuario);
 
         $usuario = AppChamado::with('usuario')->get();
 
-        return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario]);
+        return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico]);
     }
 
     public function atribuir(Request $request, AppChamado $idchamado){
+        //select tecnico
+        $tecnico = Usuario::all();
 
         $dados_chamado = AppChamado::all();
 
@@ -56,15 +60,17 @@ class TecnicoController extends Controller
 
         if ($idchamado) {
             $atribuicao = '1';
-            return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
+            return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             $atribuicao = '2';
-            return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
+            return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         }
 
     }
 
     public function status(Request $request, AppChamado $idchamado){
+        //select tecnico
+        $tecnico = Usuario::all();
 
         $dados_chamado = AppChamado::all();
 
@@ -77,14 +83,16 @@ class TecnicoController extends Controller
 
         if ($idchamado) {
             $status_alterado = '1';
-            return redirect()->route('chamado.meuschamados', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
+            return redirect()->route('chamado.meuschamados', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             $status_alterado = '2';
-            return redirect()->route('chamado.meuschamados', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
+            return redirect()->route('chamado.meuschamados', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         }
     }
 
     public function tipoerro(Request $request){
+        //select tecnico
+        $tecnico = Usuario::all();
 
         $atribuicao = '';
         $status_alterado = '';
@@ -99,7 +107,7 @@ class TecnicoController extends Controller
 
         $usuario = AppChamado::with('usuario')->get();
 
-        return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario]);
+        return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Técnico', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico]);
     }
 
 }

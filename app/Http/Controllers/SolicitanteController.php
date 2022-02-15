@@ -6,19 +6,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\AppChamado;
 use App\TipoErro;
-use Illuminate\Support\Facades\Mail;
+use App\Usuario;
 
 class SolicitanteController extends Controller
 {
     public function solicitante()
     {
+        //select tecnico
+        $tecnico = Usuario::all();
+
         //tipo erro
         $tipo_erro = TipoErro::all();
 
         //filtragem dos chamados de quem está acessando
         $usuario = $_SESSION['idusuario'];
 
-        $dados_chamado = AppChamado::all()->where('solicitante_id', $usuario);
+        $dados_chamado = AppChamado::all()->where('tecnico_id', 1);
 
         //mostrando nome do solicitante
         $dados_usuario = '';
@@ -34,16 +37,19 @@ class SolicitanteController extends Controller
 
         $usuario = AppChamado::with('usuario')->get();
 
-        return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario]);
+        return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
     }
 
     public function em_aberto()
     {
+        //select tecnico
+        $tecnico = Usuario::all();
+
         //tipo erro
         $tipo_erro = TipoErro::all();
 
         //filtragem dos chamados em aberto
-        $usuario =     $_SESSION['idusuario'];
+        $usuario = $_SESSION['idusuario'];
         $dados_chamado = AppChamado::all()->where('status', 1)->where('solicitante_id', $usuario);
 
         //pegando valor para quem foi o solicitante
@@ -57,11 +63,14 @@ class SolicitanteController extends Controller
             $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
         }
 
-        return view('app.solicitante.em_aberto', ['titulo' => 'Chamados em Aberto', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'usuario' => $usuario]);
+        return view('app.solicitante.em_aberto', ['titulo' => 'Chamados em Aberto', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'usuario' => $usuario, 'tecnico' => $tecnico]);
     }
 
     public function concluido()
     {
+        //select tecnico
+        $tecnico = Usuario::all();
+
         //tipo erro
         $tipo_erro = TipoErro::all();
 
@@ -80,11 +89,13 @@ class SolicitanteController extends Controller
             $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
         }
 
-        return view('app.solicitante.concluido', ['titulo' => 'Chamados Concluidos', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'usuario' => $usuario]);
+        return view('app.solicitante.concluido', ['titulo' => 'Chamados Concluidos', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'usuario' => $usuario, 'tecnico' => $tecnico]);
     }
 
     public function cadastrar_chamado(Request $request)
     {
+        //select tecnico
+        $tecnico = Usuario::all();
 
         $tipo_erro = TipoErro::all();
 
@@ -113,13 +124,14 @@ class SolicitanteController extends Controller
         $chamado->status = $request->input('Status');
         $chamado->prioridade = $request->input('Prioridade');
         $chamado->solicitante_id = $request->input('Idusuario');
+        $chamado->tecnico_id = $request->input('tecnico_id');
 
         //print_r($chamado->getAttributes());
 
         $chamado->save();
 
         //filtragem dos chamados de quem está acessando
-        $usuario =     $_SESSION['idusuario'];
+        $usuario = $_SESSION['idusuario'];
 
         $dados_chamado = AppChamado::all()->where('solicitante_id', $usuario);
 
@@ -145,15 +157,18 @@ class SolicitanteController extends Controller
                 $message->from('jennifercater09@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
             });*/
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario]);
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             $cadastrado = '2';
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario]);
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         }
     }
 
     public function update(Request $request, AppChamado $idchamado)
     {
+        //select tecnico
+        $tecnico = Usuario::all();
+
         $tipo_erro = TipoErro::all();
 
         $dados_chamado = AppChamado::all();
@@ -207,15 +222,18 @@ class SolicitanteController extends Controller
                 $message->from('jennifercater09@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
             });*/
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario]);
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             $editado = '2';
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario]);
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         }
     }
 
     public function destroy(AppChamado $idchamado)
     {
+
+        //select tecnico
+        $tecnico = Usuario::all();
 
         $tipo_erro = TipoErro::all();
 
@@ -255,10 +273,10 @@ class SolicitanteController extends Controller
                 $message->from('jennifercater09@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
             });*/
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario]);
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             $excluido = '2';
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario]);
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         }
     }
 

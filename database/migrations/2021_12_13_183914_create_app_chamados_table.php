@@ -26,7 +26,6 @@ class CreateAppChamadosTable extends Migration
             $table->date('data_alteracao');
             $table->integer('status');
             $table->integer('prioridade');
-            $table->integer('tecnico_atribuido')->nullable();
             $table->timestamps();
 
             $table->foreign('tecnico_id')->references('idusuario')->on('usuario');
