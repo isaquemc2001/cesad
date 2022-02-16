@@ -57,11 +57,11 @@
 
                     <thead>
                         <tr>
-                            <th class="th-titulo">Título</th>
-                            <th class="th-categoria">Categoria</th>
-                            <th class="th-status">Status</th>
-                            <th class="th-descricao">Descrição</th>
-                            <th class="th-acoes">Ações</th>
+                            <th class="th-titulo-tec">Título</th>
+                            <th class="th-categoria-tec">Categoria</th>
+                            <th class="th-status-tec">Status</th>
+                            <th class="th-descricao-tec">Descrição</th>
+                            <th class="th-acoes-tec">Ações</th>
                             <th hidden>data-abertura</th>
                         </tr>
                     </thead>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\AppChamado;
 use App\TipoErro;
 use App\Usuario;
+use Illuminate\Support\Facades\Mail;
 
 class SolicitanteController extends Controller
 {
@@ -152,11 +153,11 @@ class SolicitanteController extends Controller
 
         if ($chamado) {
             $cadastrado = '1';
-            /*
+
             Mail::send('app.solicitante.mail.novo_chamado', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('jennifercater09@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
-            });*/
+            });
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             $cadastrado = '2';
