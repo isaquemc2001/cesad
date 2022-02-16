@@ -16,7 +16,7 @@ class TecnicoController extends Controller
         //select tecnico
         $tecnico = Usuario::all();
 
-        $dados_chamado = AppChamado::all()->where('tecnico_id', 1);
+        $dados_chamado = AppChamado::all()->where('tecnico_id', NULL);
 
         $usuario = AppChamado::with('usuario')->get();
 

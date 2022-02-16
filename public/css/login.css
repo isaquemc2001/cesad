@@ -15,7 +15,8 @@ html, body {
 }
 
 .logochamado{
-    margin-left: 50px;
+    width: 9rem;
+    margin-left: 30%;
     justify-content: center;
 }
 
@@ -23,11 +24,27 @@ html, body {
     margin-top:10%;
     margin-left: 35%;
     width: 30%;
-    height: 45vh;
+    height: 60;
     justify-content: center;
 }
 
 span{
     color: red;
     font-size: 12;
+}
+
+@media (max-width: 920px) {
+    .logochamado{
+        width: 9rem;
+        margin-left: 20%;
+        justify-content: center;
+    }
+
+    .card{
+        margin-top: 30%;
+        margin-left: 10%;
+        width: 80%;
+        height: 60;
+        justify-content: center;
+    }
 }

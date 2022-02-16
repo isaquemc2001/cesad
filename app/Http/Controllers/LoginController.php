@@ -41,7 +41,7 @@ class LoginController extends Controller
 
         $senhamd5 = md5($senha.'RFzv-RJj]%Ub-6K~Wxna@Jc}Y<3ru2o%');
 
-        $usuario = $tabela->where('cpf', $cpf)->where('senha', $senhamd5)->get()->first();
+        $usuario = $tabela->where('cpf', $cpf)->where('senha', $senha)->get()->first();
 
         if(isset($usuario->nome)){
             //dd($usuario);

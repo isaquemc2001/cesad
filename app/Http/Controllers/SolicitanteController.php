@@ -21,7 +21,7 @@ class SolicitanteController extends Controller
         //filtragem dos chamados de quem está acessando
         $usuario = $_SESSION['idusuario'];
 
-        $dados_chamado = AppChamado::all()->where('tecnico_id', 1);
+        $dados_chamado = AppChamado::all()->where('tecnico_id', NULL);
 
         //mostrando nome do solicitante
         $dados_usuario = '';
