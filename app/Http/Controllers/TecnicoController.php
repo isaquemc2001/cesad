@@ -10,6 +10,9 @@ use App\Usuario;
 class TecnicoController extends Controller
 {
     public function tecnico(){
+        if($_SESSION['idusuariotipo'] != 4){
+            return redirect()->route('chamado.solicitante');
+        }
         $atribuicao = '';
         $status_alterado = '';
 
@@ -24,6 +27,9 @@ class TecnicoController extends Controller
     }
 
     public function meuschamados(){
+        if($_SESSION['idusuariotipo'] != 4){
+            return redirect()->route('chamado.solicitante');
+        }
         //select tecnico
         $tecnico = Usuario::all();
 

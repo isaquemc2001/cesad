@@ -100,8 +100,6 @@ class SolicitanteController extends Controller
 
         $tipo_erro = TipoErro::all();
 
-        $dados_chamado = AppChamado::all();
-
         $chamado = new AppChamado();
 
         //anexo image
@@ -134,7 +132,7 @@ class SolicitanteController extends Controller
         //filtragem dos chamados de quem está acessando
         $usuario = $_SESSION['idusuario'];
 
-        $dados_chamado = AppChamado::all()->where('solicitante_id', $usuario);
+        $dados_chamado = AppChamado::all()->where('tecnico_id', NULL);
 
         //mostrando nome do solicitante
         $dados_usuario = '';
@@ -153,11 +151,11 @@ class SolicitanteController extends Controller
 
         if ($chamado) {
             $cadastrado = '1';
-
+            /*
             Mail::send('app.solicitante.mail.novo_chamado', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('jennifercater09@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
-            });
+            });*/
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             $cadastrado = '2';
@@ -202,7 +200,7 @@ class SolicitanteController extends Controller
         //filtragem dos chamados de quem está acessando
         $usuario = $_SESSION['idusuario'];
 
-        $dados_chamado = AppChamado::all()->where('solicitante_id', $usuario);
+        $dados_chamado = AppChamado::all()->where('tecnico_id', NULL);
 
         //mostrando nome do solicitante
         $dados_usuario = '';
@@ -253,7 +251,7 @@ class SolicitanteController extends Controller
         //filtragem dos chamados de quem está acessando
         $usuario = $_SESSION['idusuario'];
 
-        $dados_chamado = AppChamado::all()->where('solicitante_id', $usuario);
+        $dados_chamado = AppChamado::all()->where('tecnico_id', NULL);
 
         //mostrando nome do solicitante
         $dados_usuario = '';

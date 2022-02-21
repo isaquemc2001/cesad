@@ -40,6 +40,10 @@ nav {
     color: #F3F1F5;
 }
 
+.btn-table {
+    padding: 10px 30px;
+}
+
 .btn-table:hover{
     color: white;
     opacity: 0.8;

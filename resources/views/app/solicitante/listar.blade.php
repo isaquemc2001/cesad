@@ -108,10 +108,11 @@
                                 <div class="btn-table btn badge bg-primary" data-bs-toggle="modal"
                                     data-bs-target="#visualizar-chamado{{ $dados_chamado->id }}">Visualizar</div>
                                 <div class="btn-table btn badge bg-warning ml-2" data-bs-toggle="modal"
-                                    data-bs-target="#editar-chamado{{ $dados_chamado->id }}" @if ($dados_chamado->status == '2'){ hidden }  @endif>
+                                    data-bs-target="#editar-chamado{{ $dados_chamado->id }}"
+                                    @if ($dados_chamado->status == '2') { hidden } @endif>
                                     Editar</div>
 
-                                <form
+                                <form class="d-inline-block"
                                     action="{{ route('chamado.solicitante.destroy', ['idchamado' => $dados_chamado->id]) }}"
                                     method="POST">
                                     @method('DELETE')
