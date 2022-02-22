@@ -25,7 +25,7 @@ $letra[0][0];
                     </a>
                     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
                         <li class="nav-item">
-                            <a href="tecnico" class="nav-link @if($titulo == "Principal Técnico"){ active }  @endif py-3 border-bottom" aria-current="page"
+                            <a href="/chamado/tecnico" class="nav-link @if($titulo == "Principal Técnico"){ active }  @endif py-3 border-bottom" aria-current="page"
                                 title="Página Inicial" data-bs-toggle="tooltip" data-bs-placement="right">
                                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                                     <use xlink:href="#home" />
@@ -95,7 +95,7 @@ $letra[0][0];
     </a>
     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
         <li class="nav-item">
-            <a href="tecnico" class="nav-link @if($titulo == "Principal Técnico"){ active }  @endif py-3 border-bottom" aria-current="page" title="Página Inicial"
+            <a href="/chamado/tecnico" class="nav-link @if($titulo == "Principal Técnico"){ active }  @endif py-3 border-bottom" aria-current="page" title="Página Inicial"
                 data-bs-toggle="tooltip" data-bs-placement="right">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                     <use xlink:href="#home" />
@@ -103,7 +103,7 @@ $letra[0][0];
             </a>
         </li>
         <li>
-            <a href="meuschamados" class="nav-link @if($titulo == "Meus chamados"){ active }  @endif py-3 border-bottom" title="Seus Chamados" data-bs-toggle="tooltip"
+            <a href="/chamado/meuschamados" class="nav-link @if($titulo == "Meus chamados"){ active }  @endif py-3 border-bottom" title="Seus Chamados" data-bs-toggle="tooltip"
                 data-bs-placement="right">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Chamados">
                     <use xlink:href="#table" />

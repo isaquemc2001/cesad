@@ -51,13 +51,7 @@
             Chamado não Atribuido!
         </div>
 
-        <!--AVISO DE CADASTRO-->
-        <div class="alert alert-success mt-3" <?php if($status_alterado == '1'){ }else {echo 'hidden';} ?> role="alert">
-            Status do Chamado Alterado com Sucesso!
-        </div>
-        <div class="alert alert-danger mt-3" <?php if($status_alterado == '2'){ }else {echo 'hidden';} ?> role="alert">
-            Status do Chamado não Alterado!
-        </div>
+
         <div class="row">
             <div class="col-6 col-xxl-10">
                 <h1 class="titulos-pag">Chamados</h1>
@@ -76,7 +70,7 @@
                             <th class="th-categoria-tec">Categoria</th>
                             <th class="th-status-tec">Status</th>
                             <th class="th-descricao-tec">Descrição</th>
-                            <th class="th-acoes">Ações</th>
+                            <th class="th-acoes-tec">Ações</th>
                             <th hidden>data-abertura</th>
                         </tr>
                     </thead>

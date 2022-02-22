@@ -169,7 +169,7 @@
                                         <option value="3">Alta</option>
                                     </select>
                                 </div>
-                                <input type="text" name="status" value="1" hidden>
+                                <input type="number" name="status" value="1" hidden>
                             </div>
                         </div>
                     </div>

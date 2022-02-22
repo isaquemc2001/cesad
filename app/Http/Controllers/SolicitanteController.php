@@ -76,7 +76,7 @@ class SolicitanteController extends Controller
         $tipo_erro = TipoErro::all();
 
         //filtragem dos chamados em aberto
-        $usuario =     $_SESSION['idusuario'];
+        $usuario = $_SESSION['idusuario'];
         $dados_chamado = AppChamado::all()->where('status', 2)->where('solicitante_id', $usuario);
 
         //pegando valor para quem foi o solicitante
