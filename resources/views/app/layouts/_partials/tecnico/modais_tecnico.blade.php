@@ -109,12 +109,8 @@
                                 disabled>{{ $dados_chamado->descricao }}</textarea>
 
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col">
                                     <h5>Atualização</h5>
-                                </div>
-                                <div class="col-4">
-                                    <button type="button" class="btn-table btn badge bg-primary ml-4"
-                                        data-bs-dismiss="modal">Histórico de Atualização</button>
                                 </div>
                             </div>
 

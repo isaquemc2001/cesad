@@ -110,7 +110,7 @@ class SolicitanteController extends Controller
 
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
 
-            $requestImage->move(public_path('images/anexos'), $imageName);
+            $requestImage->move(public_path('/images/anexos'), $imageName);
 
             $chamado->anexo = $imageName;
         }

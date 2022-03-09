@@ -11,6 +11,13 @@ class LoginController extends Controller
 {
     public function login(Request $request){
 
+        session_start();
+        if(isset($_SESSION['cpf']) && isset($_SESSION['senha']) && $_SESSION['idusuariotipo'] == 4){
+            return redirect()->route('chamado.tecnico');
+        } else if(isset($_SESSION['cpf']) && isset($_SESSION['senha']) && $_SESSION['idusuariotipo'] != 4){
+            return redirect()->route('chamado.solicitante');
+        }
+
         $erro = '';
 
         if($request->get('erro') == 1){

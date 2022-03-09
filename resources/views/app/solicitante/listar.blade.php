@@ -97,11 +97,15 @@
                                 @endphp
                             </td>
                             <td>
-                                @if ($dados_chamado->status == '1')
-                                    Em aberto
-                                @else
-                                    Concluido
-                                @endif
+                                <?php
+                                if ($dados_chamado->status == '1') {
+                                    echo $dados = 'Aberto';
+                                } elseif ($dados_chamado->status == '2') {
+                                    echo $dados = 'Concluido';
+                                } elseif ($dados_chamado->status == '3') {
+                                    echo $dados = 'Não-Atribuido';
+                                }
+                                ?>
                             </td>
                             <td style="white-space: normal">{{ $dados_chamado->descricao }}</td>
                             <td>

@@ -64,7 +64,7 @@ $letra[0][0];
                 <div class="dropdown dropstart">
                     <a href="#" class="d-flex" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img src="/images/icons_perfil/<?php echo $letra[0][0]; ?>.png" class="btn-nav btn-perfil" href="#"
+                        <img src="../images/icons_perfil/<?php echo $letra[0][0]; ?>.png" class="btn-nav btn-perfil" href="#"
                             title="Perfil" role="button" id="dropdown" aria-expanded="false">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">

@@ -71,7 +71,7 @@
                                 <div class="col-4 col-sm-4">
                                     <h5>Visualizar Anexo</h5>
                                     <a data-fancybox="gallery1" href="/images/anexos/{{ $dados_chamado->anexo }}"><img
-                                            src="/images/anexos/{{ $dados_chamado->anexo }}" style="width: 50%;"></a>
+                                            src="/images/anexos/{{$dados_chamado->anexo}}" style="width: 50%;"></a>
                                 </div>
                                 <div class="col-4 col-sm-4">
                                     <h5>Data de Abertura</h5>
@@ -90,12 +90,8 @@
                                 disabled>{{ $dados_chamado->descricao }}</textarea>
 
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col">
                                     <h5>Atualização</h5>
-                                </div>
-                                <div class="col-4">
-                                    <button type="button" class="btn-table btn badge bg-primary ml-4"
-                                        data-bs-dismiss="modal">Histórico de Atualização</button>
                                 </div>
                             </div>
 

@@ -9,7 +9,7 @@
     <meta name="theme-color" content="blue">
 
     <!--Style CSS-->
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
+    <link rel="stylesheet" href="../css/login.css" />
 
     <!--BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -51,12 +51,12 @@
 
 </head>
 
-<body class="background">
+<body style="background: url(images/fundo_login.jpg);">
 
     <div class="container">
         <div class="card shadow">
             <div class="card-body">
-                <img class="logochamado mt-3 mb-3" src="/images/logochamado.png">
+                <img class="logochamado mt-3 mb-3" src="images/logochamado.png">
                 <?php if($erro == ''){
 
                 }else{

@@ -9,7 +9,6 @@ html, body {
 }
 
 .background{
-    background: url(/images/fundo_login.jpg);
     height: 100%;
     display: flex;
 }
