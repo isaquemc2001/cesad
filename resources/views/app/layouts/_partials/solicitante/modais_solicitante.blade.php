@@ -40,7 +40,7 @@
                                     </select>
                                 </div>
                                 <div class="col-6 col-sm-6">
-                                    <h5>Categoria</h5>
+                                    <h5>Setor Responsável</h5>
                                     <select id="categoria-disabled" class="form-select mb-4" disabled>
                                         <option>
                                             <?php $valor = $dados_chamado->tipo_erro; ?>
@@ -123,39 +123,11 @@
                                 <input type="text" class="form-control mb-4" name="titulo"
                                     value="{{ $dados_chamado->titulo }}">
 
-                                <h5>Tipo de Erro</h5>
+                                <h5>Setor Responsável</h5>
                                 <select id="tipoerro" class="form-select mb-4" name="tipo_erro" required>
 
-                                    @php
-                                        if ($dados_chamado->tipo_erro == '1') {
-                                            $dados = 'AVA';
-                                            $valor = 1;
-                                        } elseif ($dados_chamado->tipo_erro == '2') {
-                                            $dados = 'AVA/GD';
-                                            $valor = 2;
-                                        } elseif ($dados_chamado->tipo_erro == '3') {
-                                            $dados = 'AVA/NFC';
-                                            $valor = 3;
-                                        } elseif ($dados_chamado->tipo_erro == '4') {
-                                            $dados = 'Cadastro';
-                                            $valor = 4;
-                                        } elseif ($dados_chamado->tipo_erro == '5') {
-                                            $dados = 'Configurações';
-                                            $valor = 5;
-                                        } elseif ($dados_chamado->tipo_erro == '6') {
-                                            $dados = 'Dificuldade de acesso';
-                                            $valor = 6;
-                                        } elseif ($dados_chamado->tipo_erro == '7') {
-                                            $dados = 'Dificuldade de usuário';
-                                            $valor = 7;
-                                        } elseif ($dados_chamado->tipo_erro == '8') {
-                                            $dados = 'Erro de sistema';
-                                            $valor = 8;
-                                        } elseif ($dados_chamado->tipo_erro == '9') {
-                                            $dados = 'ORBI';
-                                            $valor = 9;
-                                        }
-                                    @endphp
+                                    <?php $valor = $dados_chamado->tipo_erro; ?>
+                                    @include('app.layouts._partials.solicitante.tipo_erro_exibicao')
 
                                     @include('app.layouts._partials.solicitante.tipo_erro_editar')
 

@@ -1,4 +1,4 @@
-<h6>Selecione o Técnico</h6>
+<h6>Selecione o Responsável</h6>
 <select class="form-select" name="tecnico_id">
     <option value='' selected>Selecione</option>
     @foreach ($tecnico as $key => $tecnico)

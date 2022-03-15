@@ -1,4 +1,4 @@
-<h5>Nome do Técnico</h5>
+<h5>Nome do Responsável</h5>
 @foreach ($tecnico as $key => $tecnico)
 @php
 if ($dados_chamado->tecnico_id == $tecnico->idusuario) {

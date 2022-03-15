@@ -312,18 +312,18 @@ table {
     }
 
     .th-titulo-tec{
-        width: 18%;
+        width: 100%;
     }
     .th-categoria-tec{
-        width: 12%;
+        width: 100%;
     }
     .th-status-tec{
-        width: 9%;
+        width: 100%;
     }
     .th-descricao-tec{
-        width: 39%;
+        width: 100%;
     }
     .th-acoes-tec{
-        width: 16%;
+        width: 100%;
     }
 }

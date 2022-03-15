@@ -25,7 +25,7 @@ $letra[0][0];
                     </a>
                     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
                         <li class="nav-item">
-                            <a href="/chamado/tecnico" class="nav-link @if($titulo == "Principal Técnico"){ active }  @endif py-3 border-bottom" aria-current="page"
+                            <a href="/chamado/tecnico" class="nav-link @if($titulo == "Principal Resposável"){ active }  @endif py-3 border-bottom" aria-current="page"
                                 title="Página Inicial" data-bs-toggle="tooltip" data-bs-placement="right">
                                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                                     <use xlink:href="#home" />
@@ -95,7 +95,7 @@ $letra[0][0];
     </a>
     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
         <li class="nav-item">
-            <a href="/chamado/tecnico" class="nav-link @if($titulo == "Principal Técnico"){ active }  @endif py-3 border-bottom" aria-current="page" title="Página Inicial"
+            <a href="/chamado/tecnico" class="nav-link @if($titulo == "Principal Resposável"){ active }  @endif py-3 border-bottom" aria-current="page" title="Página Inicial"
                 data-bs-toggle="tooltip" data-bs-placement="right">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                     <use xlink:href="#home" />

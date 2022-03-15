@@ -59,29 +59,12 @@
 
                             <div class="row">
                                 <div class="col-6 col-sm-6">
-                                    <h5>Categoria</h5>
+                                    <h5>Setor Responsável</h5>
                                     <select id="categoria-disabled" class="form-select mb-4" disabled>
-                                        <option>@php
-                                            if ($dados_chamado->tipo_erro == '1') {
-                                                echo $dados = 'AVA';
-                                            } elseif ($dados_chamado->tipo_erro == '2') {
-                                                echo $dados = 'AVA/GD';
-                                            } elseif ($dados_chamado->tipo_erro == '3') {
-                                                echo $dados = 'AVA/NFC';
-                                            } elseif ($dados_chamado->tipo_erro == '4') {
-                                                echo $dados = 'Cadastro';
-                                            } elseif ($dados_chamado->tipo_erro == '5') {
-                                                echo $dados = 'Configurações';
-                                            } elseif ($dados_chamado->tipo_erro == '6') {
-                                                echo $dados = 'Dificuldade de acesso';
-                                            } elseif ($dados_chamado->tipo_erro == '7') {
-                                                echo $dados = 'Dificuldade de usuário';
-                                            } elseif ($dados_chamado->tipo_erro == '8') {
-                                                echo $dados = 'Erro de sistema';
-                                            } elseif ($dados_chamado->tipo_erro == '9') {
-                                                echo $dados = 'ORBI';
-                                            }
-                                        @endphp</option>
+                                        <option>
+                                            <?php $valor = $dados_chamado->tipo_erro; ?>
+                                            @include('app.layouts._partials.tecnico.tipo_erro_exibicao')
+                                        </option>
                                     </select>
                                 </div>
                             </div>

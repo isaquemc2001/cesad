@@ -61,7 +61,7 @@
                 <thead>
                     <tr>
                         <th class="th-titulo">Título</th>
-                        <th class="th-categoria">Categoria</th>
+                        <th class="th-categoria">Setor Responsável</th>
                         <th class="th-status">Status</th>
                         <th class="th-descricao">Descrição</th>
                         <th class="th-acoes">Ações</th>
