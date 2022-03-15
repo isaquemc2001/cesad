@@ -74,27 +74,9 @@
                         <tr>
                             <td>{{ $dados_chamado->titulo }}</td>
                             <td>
-                                @php
-                                    if ($dados_chamado->tipo_erro == '1') {
-                                        echo $dados = 'AVA';
-                                    } elseif ($dados_chamado->tipo_erro == '2') {
-                                        echo $dados = 'AVA/GD';
-                                    } elseif ($dados_chamado->tipo_erro == '3') {
-                                        echo $dados = 'AVA/NFC';
-                                    } elseif ($dados_chamado->tipo_erro == '4') {
-                                        echo $dados = 'Cadastro';
-                                    } elseif ($dados_chamado->tipo_erro == '5') {
-                                        echo $dados = 'Configurações';
-                                    } elseif ($dados_chamado->tipo_erro == '6') {
-                                        echo $dados = 'Dificuldade de acesso';
-                                    } elseif ($dados_chamado->tipo_erro == '7') {
-                                        echo $dados = 'Dificuldade de usuário';
-                                    } elseif ($dados_chamado->tipo_erro == '8') {
-                                        echo $dados = 'Erro de sistema';
-                                    } elseif ($dados_chamado->tipo_erro == '9') {
-                                        echo $dados = 'ORBI';
-                                    }
-                                @endphp
+                                <?php $valor = $dados_chamado->tipo_erro; ?>
+                                @include('app.layouts._partials.solicitante.tipo_erro_exibicao')
+                                
                             </td>
                             <td>
                                 <?php
