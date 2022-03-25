@@ -40,7 +40,7 @@
                                     </select>
                                 </div>
                                 <div class="col-6 col-sm-6">
-                                    <h5>Setor Responsável</h5>
+                                    <h5>Demanda</h5>
                                     <select id="categoria-disabled" class="form-select mb-4" disabled>
                                         <option>
                                             <?php $valor = $dados_chamado->tipo_erro; ?>
@@ -52,18 +52,24 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-4 col-sm-4">
+                                <div class="col-12 col-sm-4  mb-4">
                                     <h5>Visualizar Anexo</h5>
                                     <a data-fancybox="gallery1" href="/images/anexos/{{ $dados_chamado->anexo }}"><img
                                             src="/images/anexos/{{$dados_chamado->anexo}}" style="width: 50%;"></a>
                                 </div>
-                                <div class="col-4 col-sm-4">
+                                <div class="col-6 col-sm-4">
                                     <h5>Data de Abertura</h5>
                                     <input type="text" class="form-control mb-4" value="@php echo $data_abertura = implode('/', array_reverse(explode('-', $dados_chamado->data_abertura))); @endphp" disabled>
                                 </div>
-                                <div class="col-4 col-sm-4">
+                                <div class="col-6 col-sm-4">
                                     <h5>Data de Alteração</h5>
                                     <input type="text" class="form-control mb-4" value="@php echo $data_alteracao = implode('/', array_reverse(explode('-', $dados_chamado->data_alteracao))); @endphp" disabled>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <a href="/images/anexos/{{ $dados_chamado->anexo }}" download="{{ $dados_chamado->anexo }}"><Button class="btn btn-primary mb-4">Baixar Anexo</Button></a>
                                 </div>
                             </div>
 
@@ -142,9 +148,13 @@
                             </div>
                             <div class="col">
                                 <h5>Descrição</h5>
-                                <textarea class="form-control" id="textarea-disabled" rows="14"
+                                <textarea class="form-control mb-3" id="textarea-disabled" rows="6"
                                     name="descricao">{{ $dados_chamado->descricao }}</textarea>
+                                    <h5>Atualização</h5>
+                                <textarea class="form-control" id="textarea-disabled" rows="6"
+                                    name="descricao" disabled>{{ $dados_chamado->resposta }}</textarea>
                             </div>
+
                             <input type="text" value="{{ $dados_chamado->data_abertura }}" name="data_abertura"
                                 hidden>
                             <input type="text" value="@php echo $data_alteracao = date('d/m/Y')  @endphp" name="data_alteracao" hidden>

@@ -1,4 +1,4 @@
-<h5>Setor Responsável</h5>
+<h5>Demanda</h5>
 <select id="tipoerro" class="form-select mb-4" name="tipo_erro" required>
 
     @foreach ($tipo_erro as $key => $tipo_erro)

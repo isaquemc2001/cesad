@@ -54,6 +54,9 @@
             <div class="col-6 col-xxl-10">
                 <h1 class="titulos-pag">Chamados</h1>
             </div>
+            <div class="col-6 col-xxl-2 d-flex justify-content-end" style="height: 50%;">
+                <a href="{{ route('chamado.exportara') }}" target="_blank"><button class="btn-add btn btn-primary">Gerar relatório PDF</button></a>
+            </div>
         </div>
 
         <div class="row">
@@ -65,7 +68,7 @@
                     <thead>
                         <tr>
                             <th class="th-titulo-tec">Título</th>
-                            <th class="th-categoria-tec">Setor Responsável</th>
+                            <th class="th-categoria-tec">Demanda</th>
                             <th class="th-status-tec">Status</th>
                             <th class="th-descricao-tec">Descrição</th>
                             <th class="th-acoes-tec">Ações</th>

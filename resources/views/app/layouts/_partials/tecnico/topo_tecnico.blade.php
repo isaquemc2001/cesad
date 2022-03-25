@@ -41,6 +41,14 @@ $letra[0][0];
                             </a>
                         </li>
                         <li>
+                            <a href="/chamado/concluido_reponsavel" class="nav-link @if($titulo == "Concluido Responsável"){ active }  @endif py-3 border-bottom" title="Concluidos Responsável" data-bs-toggle="tooltip"
+                                data-bs-placement="right">
+                                <svg class="bi" width="24" height="24" role="img" aria-label="Home">
+                                    <use xlink:href="#check" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
                             <a class="nav-link py-3 border-bottom" data-bs-toggle="modal" data-bs-target="#tipoerro">
                                 <svg class="bi" width="24" height="24" role="img" aria-label="Products">
                                     <use xlink:href="#new" />
@@ -107,6 +115,14 @@ $letra[0][0];
                 data-bs-placement="right">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Chamados">
                     <use xlink:href="#table" />
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a href="/chamado/concluido_reponsavel" class="nav-link @if($titulo == "Concluido Responsável"){ active }  @endif py-3 border-bottom" title="Concluidos Responsável" data-bs-toggle="tooltip"
+                data-bs-placement="right">
+                <svg class="bi" width="24" height="24" role="img" aria-label="Home">
+                    <use xlink:href="#check" />
                 </svg>
             </a>
         </li>

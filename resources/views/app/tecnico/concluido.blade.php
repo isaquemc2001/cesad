@@ -43,22 +43,21 @@
 
     <!--INICIO GRID DOS CHAMADOS-->
     <div class="container">
-        <!--AVISO DE ATRIBUIÇÃO-->
-        <div class="alert alert-success mt-3" <?php if($atribuicao == '1'){ }else {echo 'hidden';} ?> role="alert">
-            Chamado Atribuido com Sucesso!
-        </div>
-        <div class="alert alert-danger mt-3" <?php if($atribuicao == '2'){ }else {echo 'hidden';} ?> role="alert">
-            Chamado não Atribuido!
-        </div>
-
-
         <div class="row">
+            <!--AVISO DE CADASTRO-->
+            <div class="alert alert-success mt-3" <?php if($status_alterado == '1'){ }else {echo 'hidden';} ?> role="alert">
+                Status do Chamado Alterado com Sucesso!
+            </div>
+            <div class="alert alert-danger mt-3" <?php if($status_alterado == '2'){ }else {echo 'hidden';} ?> role="alert">
+                Status do Chamado não Alterado!
+            </div>
             <div class="col-6 col-xxl-10">
                 <h1 class="titulos-pag">Chamados</h1>
             </div>
             <div class="col-6 col-xxl-2 d-flex justify-content-end" style="height: 50%;">
-                <a href="{{ route('chamado.exportarg') }}" target="_blank"><button class="btn-add btn btn-primary">Gerar relatório PDF</button></a>
+                <a href="{{ route('chamado.exportarc') }}" target="_blank"><button class="btn-add btn btn-primary">Gerar relatório PDF</button></a>
             </div>
+                
         </div>
 
         <div class="row">
@@ -86,15 +85,11 @@
                                     @include('app.layouts._partials.tecnico.tipo_erro_exibicao')
                                 </td>
                                 <td>
-                                    <?php
-                                        if ($dados_chamado->status == '1') {
-                                            echo $dados = 'Aberto';
-                                        } elseif ($dados_chamado->status == '2') {
-                                            echo $dados = 'Concluido';
-                                        } elseif ($dados_chamado->status == '3') {
-                                            echo $dados = 'Não-Atribuido';
-                                        }
-                                    ?>
+                                    @if ($dados_chamado->status == '1')
+                                        Em aberto
+                                    @else
+                                        Concluido
+                                    @endif
                                 </td>
                                 <td>{{ $dados_chamado->descricao }}</td>
                                 <td>
@@ -103,9 +98,8 @@
                                     <div class="btn-table btn badge bg-warning ml-2" data-bs-toggle="modal"
                                         data-bs-target="#atribuir-chamado{{ $dados_chamado->id }}">Atribuir</div>
                                     <div class="btn-table btn badge bg-success ml-2" data-bs-toggle="modal"
-                                        data-bs-target="#alterar-status{{ $dados_chamado->id }}" @if ($dados_chamado->status == '3'){ hidden }  @endif>Alterar Status</div>
+                                        data-bs-target="#alterar-status{{ $dados_chamado->id }}">Alterar Status</div>
                                 </td>
-
                                 <td hidden>{{ $dados_chamado->created_at }}</td>
                             </tr>
                         @endforeach
@@ -119,6 +113,4 @@
     </div>
     <!--FIM GRID DOS CHAMADOS-->
     </div>
-
-
 @endsection

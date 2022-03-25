@@ -1,4 +1,5 @@
 @foreach ($dados_chamado as $key => $dados_chamado)
+
     <!-- Modal VISUALIZAÇÃO -->
     <div class="modal fade" id="visualizar-chamado{{ $dados_chamado->id }}" data-bs-backdrop="static"
         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -59,7 +60,7 @@
 
                             <div class="row">
                                 <div class="col-6 col-sm-6">
-                                    <h5>Setor Responsável</h5>
+                                    <h5>Demanda</h5>
                                     <select id="categoria-disabled" class="form-select mb-4" disabled>
                                         <option>
                                             <?php $valor = $dados_chamado->tipo_erro; ?>
@@ -73,7 +74,8 @@
                                 <div class="col-12 col-sm-4 mb-4">
                                     <h5>Visualizar Anexo</h5>
                                     <a data-fancybox="gallery1" href="/images/anexos/{{ $dados_chamado->anexo }}"><img
-                                            src="/images/anexos/{{ $dados_chamado->anexo }}" style="width: 50%;"></a>
+                                        src="/images/anexos/{{ $dados_chamado->anexo }}" style="width: 50%;"></a>
+                                    
                                 </div>
                                 <div class="col-6 col-sm-4">
                                     <h5>Data de Abertura</h5>
@@ -82,6 +84,13 @@
                                 <div class="col-6 col-sm-4">
                                     <h5>Data de Alteração</h5>
                                     <input type="text" class="form-control mb-4" value="@php echo $data_alteracao = implode('/', array_reverse(explode('-', $dados_chamado->data_alteracao))); @endphp" disabled>
+                                </div>
+                            </div>
+
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <a href="/images/anexos/{{ $dados_chamado->anexo }}" download="{{ $dados_chamado->anexo }}"><Button class="btn btn-primary mb-4">Baixar Anexo</Button></a>
                                 </div>
                             </div>
 
@@ -115,7 +124,7 @@
                 </div>
             </div>
         </div>
-    </div>'
+    </div>
     <!--FIM MODAL VISUALIZAÇÃO-->
 
     <!--MODAL ATRIBUIR-->

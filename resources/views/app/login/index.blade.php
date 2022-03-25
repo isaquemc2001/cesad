@@ -81,7 +81,9 @@
                             placeholder="Informe a senha">
                         <span>{{ $errors->has('senha') ? $errors->first('senha') : '' }}</span>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2" style="width: 100%; background: #06ace1; border: none;">Acessar Chamado</button>
+                    <button type="submit" class="btn btn-primary mt-2 mb-3" style="width: 100%; background: #06ace1; border: none;">Acessar Chamado</button>
+
+                    <img src="/images/rodape.jpg" style="width: 100%;">
                 </form>
             </div>
         </div>

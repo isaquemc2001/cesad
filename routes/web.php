@@ -41,7 +41,13 @@ Route::middleware('autenticacao: padrao')->prefix('/chamado')->group(function ()
     Route::put('/tecnico/atribuir/{idchamado}', 'TecnicoController@atribuir')->name('chamado.tecnico.atribuir');
     Route::put('/tecnico/status/{idchamado}', 'TecnicoController@status')->name('chamado.tecnico.status');
     Route::get('/meuschamados', 'TecnicoController@meuschamados')->name('chamado.meuschamados');
+    Route::get('/concluido_reponsavel', 'TecnicoController@concluido_responsavel')->name('chamado.concluido_responsavel');
     Route::post('/tipoerro', 'TecnicoController@tipoerro')->name('chamado.tipoerro');
+    Route::get('/exportar', 'TecnicoController@exportar')->name('chamado.exportar');
+    Route::get('/exportarg', 'TecnicoController@exportarg')->name('chamado.exportarg');
+    Route::get('/exportarc', 'TecnicoController@exportarc')->name('chamado.exportarc');
+    Route::get('/exportara', 'TecnicoController@exportara')->name('chamado.exportara');
+    //Route::get('/exportacao/{extensao}', 'TecnicoController@exportacao')->name('chamado.exportacao');
 
     //SAIR
     Route::get('/sair' , 'LoginController@logout')->name('chamado.sair');
