@@ -1,5 +1,6 @@
 @foreach ($tecnico as $key => $tecnico)
 @php
+$tecnico_atribuido = "";
 if ($dados_chamado->tecnico_id == $tecnico->idusuario) {
     $tecnico_atribuido = $tecnico->nome;
     break;

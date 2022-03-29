@@ -9,7 +9,7 @@
 
 <body>
     <div class="container" style="text-align: center;">
-        <h5 class="mt-3 mb-3">Houve resposta e/ou alteração no chamado de {{$_SESSION['nome']}}</h5>
+        <h5 class="mt-3 mb-3">Sua chamado foi respondido</h5>
         <a href="http://127.0.0.1:8000/chamado/solicitante"><button class="button" type="button" style="color: white;
             background-color: #06ace1;
             border: none;

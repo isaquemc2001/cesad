@@ -96,6 +96,7 @@
                             <textarea class="form-control" id="textarea-disabled" rows="7"
                                 disabled>@php echo $resposta; @endphp</textarea>
                         </div>
+                        
                     </div>
                 </div>
                 <div class="modal-footer">

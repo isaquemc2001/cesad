@@ -158,6 +158,7 @@
                                     </select>
                                 </div>
                                 <input type="number" name="status" value="1" hidden>
+                                @include('app.layouts._partials.tecnico.solicitante_mail')
                             </div>
                         </div>
                     </div>
@@ -199,6 +200,7 @@
                                 name="resposta">{{ $dados_chamado->resposta }}</textarea>
 
                             <input type="text" value="@php echo $data_alteracao = date('d/m/Y')  @endphp" name="data_alteracao" hidden>
+                            @include('app.layouts._partials.tecnico.solicitante_mail')
                         </div>
                     </div>
                     <div class="modal-footer">

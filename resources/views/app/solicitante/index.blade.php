@@ -70,7 +70,7 @@
                                 <textarea required class="form-control" id="textarea-disabled" rows="14"
                                     name="Descricao">@if (old('Descricao') != ''){{ old('Descricao') }}@endif</textarea>
                             </div>
-
+                            
                             <input type="text" value="@php echo $data_abertura = date('d/m/Y')  @endphp" name="dataAbertura" hidden>
                             <input type="text" value="@php echo $data_alteracao = date('d/m/Y')  @endphp" name="dataAlteracao" hidden>
                             <input type="text" value="@php echo $status = "3";  @endphp" name="Status" hidden>

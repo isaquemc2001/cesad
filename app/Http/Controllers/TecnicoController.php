@@ -8,6 +8,7 @@ use App\TipoErro;
 use App\Usuario;
 use App\Exports\ChamadosExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Mail;
 use PDF;
 
 class TecnicoController extends Controller
@@ -30,7 +31,9 @@ class TecnicoController extends Controller
 
         $usuario = AppChamado::with('usuario')->get();
 
-        return view('app.tecnico.index', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro]);
+        $nome_solicitante_mail = "Pendente";
+
+        return view('app.tecnico.index', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
     }
 
     public function meuschamados()
@@ -46,6 +49,8 @@ class TecnicoController extends Controller
         $tecnico = Usuario::all();
 
         $usuario = $_SESSION['idusuario'];
+
+        $nome_solicitante_mail = "Pendente";
 
         $tec = Usuario::all();
 
@@ -63,7 +68,7 @@ class TecnicoController extends Controller
 
         $usuario = AppChamado::with('usuario')->get();
 
-        return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro]);
+        return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
     }
 
     public function concluido_responsavel()
@@ -80,6 +85,8 @@ class TecnicoController extends Controller
 
         $dados_chamado = AppChamado::all()->where('status', '2');
 
+        $nome_solicitante_mail = "Pendente";
+
         $tec = Usuario::all();
 
         $status_alterado = '';
@@ -94,7 +101,7 @@ class TecnicoController extends Controller
 
         $usuario = AppChamado::with('usuario')->get();
 
-        return view('app.tecnico.concluido', ['titulo' => 'Concluido Responsável', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro]);
+        return view('app.tecnico.concluido', ['titulo' => 'Concluido Responsável', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
     }
 
     public function atribuir(Request $request, AppChamado $idchamado)
@@ -114,9 +121,36 @@ class TecnicoController extends Controller
 
         $usuario = AppChamado::with('usuario')->get();
 
+        $endereco = $_SESSION['endereco'];
+        $nome_solicitante_mail = "Pendente";
+        $nome_solicitante = $request->nome_solicitante;
+
+        if ($nome_solicitante != "Pendente") {
+            //enviando email para tecnico
+            $mail_solicitante = Usuario::select('email')->where('nome', $nome_solicitante)->get()->first();
+
+            $_SESSION['endereco'] = $mail_solicitante->email;
+            $nome_solicitante_mail = $mail_solicitante->nome;
+        }
+
         if ($idchamado) {
             $atribuicao = '1';
-            return view('app.tecnico.index', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro]);
+
+            //enviando email tecnico
+            Mail::send('app.tecnico.mail.atribuicao_tecnico', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+                $message->to($_SESSION['email']);
+            });
+
+            //enviando email solicitante
+            Mail::send('app.tecnico.mail.atribuicao_solicitante', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+                $message->to($_SESSION['endereco']);
+            });
+
+            $_SESSION['endereco'] = $endereco;
+
+            return view('app.tecnico.index', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
         } else {
             $atribuicao = '2';
             return view('app.tecnico.index', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro]);
@@ -142,9 +176,34 @@ class TecnicoController extends Controller
 
         $usuario = AppChamado::with('usuario')->get();
 
+        $endereco = $_SESSION['endereco'];
+        $nome_solicitante_mail = "Pendente";
+        $nome_solicitante = $request->nome_solicitante;
+
+        if ($nome_solicitante != "Pendente") {
+            //enviando email para tecnico
+            $mail_solicitante = Usuario::select('email')->where('nome', $nome_solicitante)->get()->first();
+
+            $_SESSION['endereco'] = $mail_solicitante->email;
+            $nome_solicitante_mail = $mail_solicitante->nome;
+        }
+
         if ($idchamado) {
             $status_alterado = '1';
-            return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro]);
+
+            //enviando email tecnico
+            Mail::send('app.tecnico.mail.status_tecnico', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+                $message->to($_SESSION['email']);
+            });
+
+            //enviando email solicitante
+            Mail::send('app.tecnico.mail.status_solicitante', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+                $message->to($_SESSION['endereco']);
+            });
+
+            return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
         } else {
             $status_alterado = '2';
             return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro]);
@@ -159,6 +218,8 @@ class TecnicoController extends Controller
         //select tecnico
         $tecnico = Usuario::all();
 
+        $nome_solicitante_mail = "Pendente";
+
         $atribuicao = '';
         $status_alterado = '';
 
@@ -172,7 +233,7 @@ class TecnicoController extends Controller
 
         $usuario = AppChamado::with('usuario')->get();
 
-        return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro]);
+        return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
     }
 
     /*

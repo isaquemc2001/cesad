@@ -22,7 +22,7 @@ class SolicitanteController extends Controller
         //filtragem dos chamados de quem está acessando
         $usuario = $_SESSION['idusuario'];
 
-        $dados_chamado = AppChamado::all()->where('tecnico_id', NULL);
+        $dados_chamado = AppChamado::all()->where('tecnico_id', NULL)->where('solicitante_id', $_SESSION['idusuario']);
 
         //mostrando nome do solicitante
         $dados_usuario = '';
@@ -151,7 +151,7 @@ class SolicitanteController extends Controller
 
         if ($chamado) {
             $cadastrado = '1';
-            
+        
             Mail::send('app.solicitante.mail.novo_chamado', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
@@ -173,17 +173,22 @@ class SolicitanteController extends Controller
         $dados_chamado = AppChamado::all();
 
         //atribuindo nome do tecnico
+        $endereco = $_SESSION['endereco'];
         $nome_tecnico = $request->nome_tecnico;
 
-        //enviando email para tecnico
-        $mail_tecnico = Usuario::select('email')->where('nome', $nome_tecnico)->get()->first();
+        if ($nome_tecnico != "Pendente") {
+            //enviando email para tecnico
+            $mail_tecnico = Usuario::select('email')->where('nome', $nome_tecnico)->get()->first();
+
+            $_SESSION['endereco'] = $mail_tecnico->email;
+        }
 
         $data = $request->all();
 
         if ($request->hasFile('anexo') && $request->file('anexo')->isValid()) {
 
-            if($idchamado->anexo){
-                unlink(public_path('images/anexos/'.$idchamado->anexo));
+            if ($idchamado->anexo) {
+                unlink(public_path('images/anexos/' . $idchamado->anexo));
             }
 
             $requestImage = $request->file('anexo');
@@ -217,16 +222,17 @@ class SolicitanteController extends Controller
             $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
         }
 
-        $usuario = AppChamado::with('usuario')->get();
-        
+        $usuario = AppChamado::with('usuario')->get();        
+
         if ($idchamado) {
             $editado = '1';
             //enviando email
-            $mail_tecnico->email;
-            Mail::send('app.solicitante.mail.nova_edicao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+            Mail::send('app.solicitante.mail.atualizacao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                $message->to($_SESSION['email']);
+                $message->to($_SESSION['endereco']);
             });
+
+            $_SESSION['endereco'] = $endereco;
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             $editado = '2';
@@ -244,8 +250,8 @@ class SolicitanteController extends Controller
 
         $dados_chamado = AppChamado::all();
 
-        if($idchamado->anexo){
-            unlink(public_path('images/anexos/'.$idchamado->anexo));
+        if ($idchamado->anexo) {
+            unlink(public_path('images/anexos/' . $idchamado->anexo));
         }
 
         $idchamado->delete();
@@ -275,7 +281,7 @@ class SolicitanteController extends Controller
             //enviando email
             /*
             Mail::send('app.solicitante.mail.exclusao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                $message->from('jennifercater09@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
             });*/
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
@@ -284,5 +290,4 @@ class SolicitanteController extends Controller
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         }
     }
-
 }
