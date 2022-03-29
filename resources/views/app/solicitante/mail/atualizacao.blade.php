@@ -1,3 +1,4 @@
+@foreach ($dados_chamado as $key => $dados_chamado)
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -20,3 +21,4 @@
 </body>
 
 </html>
+@foreach ($dados_chamado as $key => $dados_chamado)

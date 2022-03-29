@@ -152,9 +152,9 @@
                                     name="descricao">{{ $dados_chamado->descricao }}</textarea>
                                     <h5>Atualização</h5>
                                 <textarea class="form-control" id="textarea-disabled" rows="6"
-                                    name="descricao" disabled>{{ $dados_chamado->resposta }}</textarea>
+                                    name="resposta" disabled>{{ $dados_chamado->resposta }}</textarea>
                             </div>
-
+                            @include('app.layouts._partials.solicitante.tecnico_mail')
                             <input type="text" value="{{ $dados_chamado->data_abertura }}" name="data_abertura"
                                 hidden>
                             <input type="text" value="@php echo $data_alteracao = date('d/m/Y')  @endphp" name="data_alteracao" hidden>
