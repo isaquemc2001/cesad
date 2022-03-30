@@ -150,7 +150,7 @@ class TecnicoController extends Controller
 
             $_SESSION['endereco'] = $endereco;
 
-            return view('app.tecnico.index', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
+            return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
         } else {
             $atribuicao = '2';
             return view('app.tecnico.index', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro]);
@@ -203,7 +203,7 @@ class TecnicoController extends Controller
                 $message->to($_SESSION['endereco']);
             });
 
-            return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
+            return redirect()->route('chamado.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
         } else {
             $status_alterado = '2';
             return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro]);

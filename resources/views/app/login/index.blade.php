@@ -56,7 +56,7 @@
     <div class="container">
         <div class="card shadow">
             <div class="card-body">
-                <img class="logochamado mt-3 mb-3" src="images/logochamado.png">
+                <img class="logochamado" src="images/logochamado.png">
                 <?php if($erro == ''){
 
                 }else{

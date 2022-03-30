@@ -151,12 +151,12 @@ class SolicitanteController extends Controller
 
         if ($chamado) {
             $cadastrado = '1';
-        
+
             Mail::send('app.solicitante.mail.novo_chamado', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
             });
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
+            return redirect()->route('chamado.solicitante', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             $cadastrado = '2';
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
@@ -171,17 +171,6 @@ class SolicitanteController extends Controller
         $tipo_erro = TipoErro::all();
 
         $dados_chamado = AppChamado::all();
-
-        //atribuindo nome do tecnico
-        $endereco = $_SESSION['endereco'];
-        $nome_tecnico = $request->nome_tecnico;
-
-        if ($nome_tecnico != "Pendente") {
-            //enviando email para tecnico
-            $mail_tecnico = Usuario::select('email')->where('nome', $nome_tecnico)->get()->first();
-
-            $_SESSION['endereco'] = $mail_tecnico->email;
-        }
 
         $data = $request->all();
 
@@ -222,18 +211,41 @@ class SolicitanteController extends Controller
             $dados_usuario = DB::table('usuario')->select('nome')->where('idusuario', $solicitante->solicitante_id)->get()->first();
         }
 
-        $usuario = AppChamado::with('usuario')->get();        
+        $usuario = AppChamado::with('usuario')->get();
 
         if ($idchamado) {
             $editado = '1';
-            //enviando email
-            Mail::send('app.solicitante.mail.atualizacao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                $message->to($_SESSION['endereco']);
-            });
+
+            //atribuindo nome do tecnico
+            $endereco = $_SESSION['endereco'];
+            $nome_tecnico = $request->nome_tecnico;
+
+            if ($nome_tecnico != "Pendente") {
+                //enviando email para tecnico
+                $mail_tecnico = Usuario::select('email')->where('nome', $nome_tecnico)->get()->first();
+
+                $_SESSION['endereco'] = $mail_tecnico->email;
+
+                //enviando email
+                Mail::send('app.solicitante.mail.atualizacao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+                    $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+                    $message->to($_SESSION['endereco']);
+                });
+
+                Mail::send('app.solicitante.mail.nova_edicao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+                    $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+                    $message->to($_SESSION['email']);
+                });
+            } else {
+                //enviando email
+                Mail::send('app.solicitante.mail.nova_edicao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+                    $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+                    $message->to($_SESSION['email']);
+                });
+            }
 
             $_SESSION['endereco'] = $endereco;
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
+            return redirect()->route('chamado.solicitante', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             $editado = '2';
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
@@ -284,7 +296,7 @@ class SolicitanteController extends Controller
                 $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
             });*/
-            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
+            return redirect()->route('chamado.solicitante', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             $excluido = '2';
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
