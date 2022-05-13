@@ -25,7 +25,7 @@ $letra[0][0];
                     </a>
                     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
                         <li class="nav-item">
-                            <a href="solicitante"
+                            <a href="{{route('chamado.solicitante')}}"
                                 class="nav-link @if($titulo == "Principal Solicitante"){ active }  @endif py-3 border-bottom" aria-current="page" title="Página Inicial"
                                 data-bs-toggle="tooltip" data-bs-placement="right">
                                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
@@ -34,7 +34,7 @@ $letra[0][0];
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="aberto" class="nav-link py-3 @if($titulo == "Chamados em Aberto"){ active }  @endif border-bottom"
+                            <a href="{{route('chamado.solicitante.em_aberto')}}" class="nav-link py-3 @if($titulo == "Chamados em Aberto"){ active }  @endif border-bottom"
                                 aria-current="page" title="Chamados em Aberto" data-bs-toggle="tooltip" data-bs-placement="right">
                                 <svg class="bi" width="24" height="24" role="img">
                                     <use xlink:href="#speedometer" />
@@ -42,7 +42,7 @@ $letra[0][0];
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="concluido" class="nav-link py-3 @if($titulo == "Chamados Concluidos"){ active }  @endif border-bottom"
+                            <a href="{{route('chamado.solicitante.concluido')}}" class="nav-link py-3 @if($titulo == "Chamados Concluidos"){ active }  @endif border-bottom"
                                 aria-current="page" title="Chamados Concluidos" data-bs-toggle="tooltip" data-bs-placement="right">
                                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                                     <use xlink:href="#check" />
@@ -105,7 +105,7 @@ $letra[0][0];
     </a>
     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
         <li class="nav-item">
-            <a href="solicitante" class="nav-link @if($titulo == "Principal Solicitante"){ active }  @endif py-3 border-bottom"
+            <a href="{{route('chamado.solicitante')}}" class="nav-link @if($titulo == "Principal Solicitante"){ active }  @endif py-3 border-bottom"
                 aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" title="Página Inicial">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                     <use xlink:href="#home" />
@@ -113,7 +113,7 @@ $letra[0][0];
             </a>
         </li>
         <li class="nav-item">
-            <a href="aberto" class="nav-link py-3 @if($titulo == "Chamados em Aberto"){ active }  @endif border-bottom"
+            <a href="{{route('chamado.solicitante.em_aberto')}}" class="nav-link py-3 @if($titulo == "Chamados em Aberto"){ active }  @endif border-bottom"
                 aria-current="page" title="Chamados em Aberto" data-bs-toggle="tooltip" data-bs-placement="right">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                     <use xlink:href="#speedometer" />
@@ -121,7 +121,7 @@ $letra[0][0];
             </a>
         </li>
         <li class="nav-item">
-            <a href="concluido" class="nav-link py-3 @if($titulo == "Chamados Concluidos"){ active }  @endif border-bottom"
+            <a href="{{route('chamado.solicitante.concluido')}}" class="nav-link py-3 @if($titulo == "Chamados Concluidos"){ active }  @endif border-bottom"
                 aria-current="page" title="Chamados Concluidos" data-bs-toggle="tooltip" data-bs-placement="right">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                     <use xlink:href="#check" />

@@ -11,6 +11,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Mail;
 use PDF;
 
+use function Ramsey\Uuid\v1;
+
 class TecnicoController extends Controller
 {
     public function tecnico()
@@ -106,6 +108,7 @@ class TecnicoController extends Controller
 
     public function atribuir(Request $request, AppChamado $idchamado)
     {
+
         //tipo erro
         $tipo_erro = TipoErro::all();
 
@@ -134,7 +137,7 @@ class TecnicoController extends Controller
         }
 
         if ($idchamado) {
-            $atribuicao = '1';
+            
 
             //enviando email tecnico
             Mail::send('app.tecnico.mail.atribuicao_tecnico', ['nomeusuario' => $_SESSION['nome']], function ($message) {
@@ -150,10 +153,13 @@ class TecnicoController extends Controller
 
             $_SESSION['endereco'] = $endereco;
 
+            $request->session()->flash('alert-danger', 'Atribuido com sucesso!');
+
             return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
-        } else {
-            $atribuicao = '2';
-            return view('app.tecnico.index', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro]);
+        }else{
+            $request->session()->flash('alert-danger', 'Não atribuido!');
+
+            return redirect()->route('chamado.tecnico', ['titulo' => 'Principal Resposável', 'dados_chamado' => $dados_chamado, 'atribuicao' => $atribuicao, 'status_alterado' => $status_alterado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
         }
     }
 
@@ -189,8 +195,7 @@ class TecnicoController extends Controller
         }
 
         if ($idchamado) {
-            $status_alterado = '1';
-
+            
             //enviando email tecnico
             Mail::send('app.tecnico.mail.status_tecnico', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
@@ -203,9 +208,13 @@ class TecnicoController extends Controller
                 $message->to($_SESSION['endereco']);
             });
 
+            $request->session()->flash('alert-danger', 'Status alterado com sucesso!');
+
             return redirect()->route('chamado.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
         } else {
-            $status_alterado = '2';
+            
+            $request->session()->flash('alert-danger', 'Status alterado com sucesso!');
+
             return view('app.tecnico.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro]);
         }
     }

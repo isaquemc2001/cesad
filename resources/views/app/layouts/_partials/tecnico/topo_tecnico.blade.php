@@ -25,7 +25,7 @@ $letra[0][0];
                     </a>
                     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
                         <li class="nav-item">
-                            <a href="/chamado/tecnico" class="nav-link @if($titulo == "Principal Resposável"){ active }  @endif py-3 border-bottom" aria-current="page"
+                            <a href="{{route('chamado.tecnico')}}" class="nav-link @if($titulo == "Principal Resposável"){ active }  @endif py-3 border-bottom" aria-current="page"
                                 title="Página Inicial" data-bs-toggle="tooltip" data-bs-placement="right">
                                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                                     <use xlink:href="#home" />
@@ -33,7 +33,7 @@ $letra[0][0];
                             </a>
                         </li>
                         <li>
-                            <a href="/chamado/meuschamados" class="nav-link @if($titulo == "Meus chamados"){ active }  @endif py-3 border-bottom" title="Seus Chamados"
+                            <a href="{{route('chamado.meuschamados')}}" class="nav-link @if($titulo == "Meus chamados"){ active }  @endif py-3 border-bottom" title="Seus Chamados"
                                 data-bs-toggle="tooltip" data-bs-placement="right">
                                 <svg class="bi" width="24" height="24" role="img" aria-label="Chamados">
                                     <use xlink:href="#table" />
@@ -41,7 +41,7 @@ $letra[0][0];
                             </a>
                         </li>
                         <li>
-                            <a href="/chamado/concluido_reponsavel" class="nav-link @if($titulo == "Concluido Responsável"){ active }  @endif py-3 border-bottom" title="Concluidos Responsável" data-bs-toggle="tooltip"
+                            <a href="{{route('chamado.concluido_responsavel')}}" class="nav-link @if($titulo == "Concluido Responsável"){ active }  @endif py-3 border-bottom" title="Concluidos Responsável" data-bs-toggle="tooltip"
                                 data-bs-placement="right">
                                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                                     <use xlink:href="#check" />
@@ -103,7 +103,7 @@ $letra[0][0];
     </a>
     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
         <li class="nav-item">
-            <a href="/chamado/tecnico" class="nav-link @if($titulo == "Principal Resposável"){ active }  @endif py-3 border-bottom" aria-current="page" title="Página Inicial"
+            <a href="{{route('chamado.tecnico')}}" class="nav-link @if($titulo == "Principal Resposável"){ active }  @endif py-3 border-bottom" aria-current="page" title="Página Inicial"
                 data-bs-toggle="tooltip" data-bs-placement="right">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                     <use xlink:href="#home" />
@@ -111,7 +111,7 @@ $letra[0][0];
             </a>
         </li>
         <li>
-            <a href="/chamado/meuschamados" class="nav-link @if($titulo == "Meus chamados"){ active }  @endif py-3 border-bottom" title="Seus Chamados" data-bs-toggle="tooltip"
+            <a href="{{route('chamado.meuschamados')}}" class="nav-link @if($titulo == "Meus chamados"){ active }  @endif py-3 border-bottom" title="Seus Chamados" data-bs-toggle="tooltip"
                 data-bs-placement="right">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Chamados">
                     <use xlink:href="#table" />
@@ -119,7 +119,7 @@ $letra[0][0];
             </a>
         </li>
         <li>
-            <a href="/chamado/concluido_reponsavel" class="nav-link @if($titulo == "Concluido Responsável"){ active }  @endif py-3 border-bottom" title="Concluidos Responsável" data-bs-toggle="tooltip"
+            <a href="{{route('chamado.concluido_responsavel')}}" class="nav-link @if($titulo == "Concluido Responsável"){ active }  @endif py-3 border-bottom" title="Concluidos Responsável" data-bs-toggle="tooltip"
                 data-bs-placement="right">
                 <svg class="bi" width="24" height="24" role="img" aria-label="Home">
                     <use xlink:href="#check" />

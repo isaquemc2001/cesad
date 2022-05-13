@@ -9,7 +9,7 @@
     <meta name="theme-color" content="blue">
 
     <!--Style CSS-->
-    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="css/login.css" />
 
     <!--BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -83,7 +83,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary mt-2 mb-3" style="width: 100%; background: #06ace1; border: none;">Acessar Chamado</button>
 
-                    <img src="/images/rodape.jpg" style="width: 100%;">
+                    <img src="images/rodape.jpg" style="width: 100%;">
                 </form>
             </div>
         </div>
