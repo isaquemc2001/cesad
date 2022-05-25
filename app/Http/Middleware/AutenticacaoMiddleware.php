@@ -16,7 +16,7 @@ class AutenticacaoMiddleware
      * @return mixed
      */
 
-    public function handle($request, Closure $next, $metodo_autenticacao)
+    public function handle($request, Closure $next)
     {
         session_start();
 
@@ -24,7 +24,7 @@ class AutenticacaoMiddleware
             return $next($request);
             session_destroy();
         }else{
-            return Response('Você não está autenticado! Clique <a href="/chamado">aqui </a>para o login');
+            return redirect()->route("chamado.login");
         }
     }
 }

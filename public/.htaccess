@@ -12,10 +12,23 @@
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 public [L,R=301]
+    RewriteRule ^(.*)/$ public/$1 [L,R=301]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ public/index.php [L]
+</IfModule>
+
+Apache
+<IfModule mod_php5.c>
+ 
+    # Definir o tempo máximo de execucao do script para 30 mins (padrão: 60s)
+    php_value max_execution_time 1800
+ 
+    # Definir o tempo de expiração de sessao para 2 horas (padrão: 24 mins)
+    php_value session.cookie_lifetime 7200
+    php_value session.cache_expire 7200
+    php_value session.gc_maxlifetime 7200
+ 
 </IfModule>

@@ -44,12 +44,15 @@
     <!--INICIO GRID DOS CHAMADOS-->
     <div class="container">
         <!--AVISO DE ATRIBUIÇÃO-->
-        <div class="alert alert-success mt-3" <?php if($atribuicao == '1'){ }else {echo 'hidden';} ?> role="alert">
-            Chamado Atribuido com Sucesso!
-        </div>
-        <div class="alert alert-danger mt-3" <?php if($atribuicao == '2'){ }else {echo 'hidden';} ?> role="alert">
-            Chamado não Atribuido!
-        </div>
+
+
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if (Session::has('alert-' . $msg))
+                <div class="alert alert-success mt-3" role="alert">
+                    {!! Session::get('alert-' . $msg) !!}
+                </div>
+            @endif
+        @endforeach
 
 
         <div class="row">
@@ -57,7 +60,8 @@
                 <h1 class="titulos-pag">Chamados</h1>
             </div>
             <div class="col-6 col-xxl-2 d-flex justify-content-end" style="height: 50%;">
-                <a href="{{ route('chamado.exportarg') }}" target="_blank"><button class="btn-add btn btn-primary">Gerar relatório PDF</button></a>
+                <a href="{{ route('chamado.exportarg') }}" target="_blank"><button class="btn-add btn btn-primary">Gerar
+                        relatório PDF</button></a>
             </div>
         </div>
 
@@ -87,13 +91,13 @@
                                 </td>
                                 <td>
                                     <?php
-                                        if ($dados_chamado->status == '1') {
-                                            echo $dados = 'Aberto';
-                                        } elseif ($dados_chamado->status == '2') {
-                                            echo $dados = 'Concluido';
-                                        } elseif ($dados_chamado->status == '3') {
-                                            echo $dados = 'Não-Atribuido';
-                                        }
+                                    if ($dados_chamado->status == '1') {
+                                        echo $dados = 'Aberto';
+                                    } elseif ($dados_chamado->status == '2') {
+                                        echo $dados = 'Concluido';
+                                    } elseif ($dados_chamado->status == '3') {
+                                        echo $dados = 'Não-Atribuido';
+                                    }
                                     ?>
                                 </td>
                                 <td>{{ $dados_chamado->descricao }}</td>
@@ -103,7 +107,8 @@
                                     <div class="btn-table btn badge bg-warning ml-2" data-bs-toggle="modal"
                                         data-bs-target="#atribuir-chamado{{ $dados_chamado->id }}">Atribuir</div>
                                     <div class="btn-table btn badge bg-success ml-2" data-bs-toggle="modal"
-                                        data-bs-target="#alterar-status{{ $dados_chamado->id }}" @if ($dados_chamado->status == '3'){ hidden }  @endif>Alterar Status</div>
+                                        data-bs-target="#alterar-status{{ $dados_chamado->id }}"
+                                        @if ($dados_chamado->status == '3') { hidden } @endif>Alterar Status</div>
                                 </td>
 
                                 <td hidden>{{ $dados_chamado->created_at }}</td>

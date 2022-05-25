@@ -2,46 +2,13 @@
 <div class="container">
     <div class="row">
         <!--AVISO DE CADASTRO-->
-        <div class="alert alert-success mt-3" <?php if ($cadastrado == '1') {
-} else {
-    echo 'hidden';
-} ?> role="alert">
-            Chamado Cadastrado com Sucesso!
-        </div>
-        <div class="alert alert-danger mt-3" <?php if ($cadastrado == '2') {
-} else {
-    echo 'hidden';
-} ?> role="alert">
-            Chamado não Cadastrado!
-        </div>
-
-        <!--AVISO DE CADASTRO-->
-        <div class="alert alert-success mt-3" <?php if ($editado == '1') {
-} else {
-    echo 'hidden';
-} ?> role="alert">
-            Chamado Alterado com Sucesso!
-        </div>
-        <div class="alert alert-danger mt-3" <?php if ($editado == '2') {
-} else {
-    echo 'hidden';
-} ?> role="alert">
-            Chamado não Alterado!
-        </div>
-
-        <!--AVISO DE EXCLUSÃO-->
-        <div class="alert alert-success mt-3" <?php if ($excluido == '1') {
-} else {
-    echo 'hidden';
-} ?> role="alert">
-            Chamado Excluido com Sucesso!
-        </div>
-        <div class="alert alert-danger mt-3" <?php if ($excluido == '2') {
-} else {
-    echo 'hidden';
-} ?> role="alert">
-            Chamado não Excluido!
-        </div>
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if (Session::has('alert-' . $msg))
+                <div class="alert alert-success mt-3" role="alert">
+                    {!! Session::get('alert-' . $msg) !!}
+                </div>
+            @endif
+        @endforeach
 
         <div class="col-6 col-xxl-10">
             <h1 class="titulos-pag">Meus Chamados</h1>

@@ -150,15 +150,15 @@ class SolicitanteController extends Controller
         $usuario = AppChamado::with('usuario')->get();
 
         if ($chamado) {
-            $cadastrado = '1';
+            $request->session()->flash('alert-danger', 'Chamado cadastrado com sucesso!');
 
             Mail::send('app.solicitante.mail.novo_chamado', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
             });
-            return redirect()->route('chamado.solicitante', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
-            $cadastrado = '2';
+            //$request->session()->flash('alert-danger', 'Chamado cadastrado com sucesso!');
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         }
     }
@@ -214,7 +214,7 @@ class SolicitanteController extends Controller
         $usuario = AppChamado::with('usuario')->get();
 
         if ($idchamado) {
-            $editado = '1';
+            //$request->session()->flash('alert-danger', 'Edição realizada com sucesso!');
 
             //atribuindo nome do tecnico
             $endereco = $_SESSION['endereco'];
@@ -245,14 +245,18 @@ class SolicitanteController extends Controller
             }
 
             $_SESSION['endereco'] = $endereco;
-            return redirect()->route('chamado.solicitante', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
-            $editado = '2';
+            //$request->session()->flash('alert-danger', 'Edição realizada com sucesso!');
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         }
     }
 
-    public function destroy(AppChamado $idchamado)
+    public function download(Request $request){
+        return response()->download(public_path().'/images/anexos/'.$request->anexo);
+    }
+
+    public function destroy(AppChamado $idchamado, Request $request)
     {
 
         //select tecnico
@@ -289,16 +293,16 @@ class SolicitanteController extends Controller
         $usuario = AppChamado::with('usuario')->get();
 
         if ($idchamado) {
-            $excluido = '1';
+            //$request->session()->flash('alert-danger', 'Exclusão realizada com sucesso!');
             //enviando email
-            /*
+
             Mail::send('app.solicitante.mail.exclusao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);
-            });*/
-            return redirect()->route('chamado.solicitante', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
+            });
+            return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
-            $excluido = '2';
+            //$request->session()->flash('alert-danger', 'Exclusão realizada com sucesso!');
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         }
     }

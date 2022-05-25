@@ -71,8 +71,8 @@
                                     name="Descricao">@if (old('Descricao') != ''){{ old('Descricao') }}@endif</textarea>
                             </div>
                             
-                            <input type="text" value="@php echo $data_abertura = date('d/m/Y')  @endphp" name="dataAbertura" hidden>
-                            <input type="text" value="@php echo $data_alteracao = date('d/m/Y')  @endphp" name="dataAlteracao" hidden>
+                            <input type="text" value="@php echo $data_abertura = date('d-m-Y')  @endphp" name="dataAbertura" hidden>
+                            <input type="text" value="@php echo $data_alteracao = date('d-m-Y')  @endphp" name="dataAlteracao" hidden>
                             <input type="text" value="@php echo $status = "3";  @endphp" name="Status" hidden>
                             <input type="text" value="@php echo $prioridade = "2";  @endphp" name="Prioridade" hidden>
                             <input type="text" value="@php echo $_SESSION['idusuario'];  @endphp" name="Idusuario" hidden>

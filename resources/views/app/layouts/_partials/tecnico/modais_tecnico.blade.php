@@ -1,5 +1,4 @@
 @foreach ($dados_chamado as $key => $dados_chamado)
-
     <!-- Modal VISUALIZAÇÃO -->
     <div class="modal fade" id="visualizar-chamado{{ $dados_chamado->id }}" data-bs-backdrop="static"
         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -18,7 +17,9 @@
 
                             <div class="row">
                                 <div class="col-12 col-sm-6">
-                                    @include('app.layouts._partials.tecnico.nome_tecnico')
+                                    @include(
+                                        'app.layouts._partials.tecnico.nome_tecnico'
+                                    )
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <h5>Nome do Solicitante</h5>
@@ -64,7 +65,9 @@
                                     <select id="categoria-disabled" class="form-select mb-4" disabled>
                                         <option>
                                             <?php $valor = $dados_chamado->tipo_erro; ?>
-                                            @include('app.layouts._partials.tecnico.tipo_erro_exibicao')
+                                            @include(
+                                                'app.layouts._partials.tecnico.tipo_erro_exibicao'
+                                            )
                                         </option>
                                     </select>
                                 </div>
@@ -72,10 +75,29 @@
 
                             <div class="row">
                                 <div class="col-12 col-sm-4 mb-4">
-                                    <h5>Visualizar Anexo</h5>
-                                    <a data-fancybox="gallery1" href="/images/anexos/{{ $dados_chamado->anexo }}"><img
-                                        src="/images/anexos/{{ $dados_chamado->anexo }}" style="width: 50%;"></a>
-                                    
+                                    <?php
+                                $anexo = $dados_chamado->anexo;
+
+                                $tipo_anexo = explode(".", $anexo);
+
+                                if(sizeof($tipo_anexo) == 'png' || sizeof($tipo_anexo) == 'jpg'){
+                                ?>
+
+                                    <h5>Anexo</h5>
+                                    <a data-fancybox="gallery1"
+                                        href="{{ asset('/public/images/anexos/' . $dados_chamado->anexo) }}"><img
+                                            src="{{ asset('/public/images/anexos/' . $dados_chamado->anexo) }}"
+                                            style="width: 50%;"></a>
+                                    <?php
+                                }
+                                if(sizeof($tipo_anexo) == 'txt'){
+                                ?>
+
+                                    <img src="{{ asset('/public/images/arquivo.png') }}" style="width: 20%;">
+                                    <?php
+                                }
+                                    ?>
+
                                 </div>
                                 <div class="col-6 col-sm-4">
                                     <h5>Data de Abertura</h5>
@@ -87,10 +109,11 @@
                                 </div>
                             </div>
 
-                            
+
                             <div class="row">
                                 <div class="col">
-                                    <a href="/images/anexos/{{ $dados_chamado->anexo }}" download="{{ $dados_chamado->anexo }}"><Button class="btn btn-primary mb-4">Baixar Anexo</Button></a>
+                                    <a href={{ route('chamado.solicitante.download', ['anexo' =>  $dados_chamado->anexo ]) }}><Button
+                                            class="btn btn-primary mb-4">Baixar Anexo</Button></a>
                                 </div>
                             </div>
 
@@ -114,8 +137,7 @@
                                 }
                             @endphp
 
-                            <textarea class="form-control" id="textarea-disabled" rows="7"
-                                disabled>@php echo $resposta; @endphp</textarea>
+                            <textarea class="form-control" id="textarea-disabled" rows="7" disabled>@php echo $resposta; @endphp</textarea>
                         </div>
                     </div>
                 </div>
@@ -146,7 +168,9 @@
                         <div class="col">
                             <div class="row">
                                 <div class="col">
-                                    @include('app.layouts._partials.tecnico.select_tecnico')
+                                    @include(
+                                        'app.layouts._partials.tecnico.select_tecnico'
+                                    )
                                 </div>
                                 <div class="col">
                                     <h6>Selecione a Prioridade</h6>
@@ -158,7 +182,9 @@
                                     </select>
                                 </div>
                                 <input type="number" name="status" value="1" hidden>
-                                @include('app.layouts._partials.tecnico.solicitante_mail')
+                                @include(
+                                    'app.layouts._partials.tecnico.solicitante_mail'
+                                )
                             </div>
                         </div>
                     </div>
@@ -196,11 +222,12 @@
                             </select>
 
                             <h6>Informe a Descrição da Atualização</h6>
-                            <textarea class="form-control"
-                                name="resposta">{{ $dados_chamado->resposta }}</textarea>
+                            <textarea class="form-control" name="resposta">{{ $dados_chamado->resposta }}</textarea>
 
                             <input type="text" value="@php echo $data_alteracao = date('d/m/Y')  @endphp" name="data_alteracao" hidden>
-                            @include('app.layouts._partials.tecnico.solicitante_mail')
+                            @include(
+                                'app.layouts._partials.tecnico.solicitante_mail'
+                            )
                         </div>
                     </div>
                     <div class="modal-footer">

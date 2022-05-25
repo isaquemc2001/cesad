@@ -45,17 +45,19 @@
     <div class="container">
         <div class="row">
             <!--AVISO DE CADASTRO-->
-        <div class="alert alert-success mt-3" <?php if($status_alterado == '1'){ }else {echo 'hidden';} ?> role="alert">
-            Status do Chamado Alterado com Sucesso!
-        </div>
-        <div class="alert alert-danger mt-3" <?php if($status_alterado == '2'){ }else {echo 'hidden';} ?> role="alert">
-            Status do Chamado não Alterado!
-        </div>
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if (Session::has('alert-' . $msg))
+                    <div class="alert alert-success mt-3" role="alert">
+                        {!! Session::get('alert-' . $msg) !!}
+                    </div>
+                @endif
+            @endforeach
             <div class="col-6 col-xxl-10">
                 <h1 class="titulos-pag">Chamados</h1>
             </div>
             <div class="col-6 col-xxl-2 d-flex justify-content-end" style="height: 50%;">
-                <a href="{{ route('chamado.exportara') }}" target="_blank"><button class="btn-add btn btn-primary">Gerar relatório PDF</button></a>
+                <a href="{{ route('chamado.exportara') }}" target="_blank"><button class="btn-add btn btn-primary">Gerar
+                        relatório PDF</button></a>
             </div>
         </div>
 
@@ -81,7 +83,9 @@
                                 <td>{{ $dados_chamado->titulo }}</td>
                                 <td>
                                     <?php $valor = $dados_chamado->tipo_erro; ?>
-                                    @include('app.layouts._partials.tecnico.tipo_erro_exibicao')
+                                    @include(
+                                        'app.layouts._partials.tecnico.tipo_erro_exibicao'
+                                    )
                                 </td>
                                 <td>
                                     @if ($dados_chamado->status == '1')
