@@ -70,6 +70,7 @@
                                         src="{{ asset('/public/images/anexos/'. $dados_chamado->anexo) }}" style="width: 50%;"></a>
                                     <?php
                                 }
+
                                 if(sizeof($tipo_anexo) == 'txt' || sizeof($tipo_anexo) == 'csv' || sizeof($tipo_anexo) == 'xlsx'){
                                 ?>
 
@@ -88,10 +89,12 @@
                                 </div>
                             </div>
 
+
                         <div class="row">
                             <div class="col">
                                 <a href={{ route('chamado.solicitante.download', ['anexo' =>  $dados_chamado->anexo ]) }}><Button
                                         class="btn btn-primary mb-4">Baixar Anexo</Button></a>
+
                             </div>
                         </div>
 

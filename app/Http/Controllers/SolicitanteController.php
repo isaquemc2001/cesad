@@ -150,7 +150,8 @@ class SolicitanteController extends Controller
         $usuario = AppChamado::with('usuario')->get();
 
         if ($chamado) {
-            $request->session()->flash('alert-danger', 'Chamado cadastrado com sucesso!');
+
+            //$request->session()->flash('alert-danger', 'Chamado cadastrado com sucesso!');
 
             Mail::send('app.solicitante.mail.novo_chamado', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
@@ -252,6 +253,7 @@ class SolicitanteController extends Controller
         }
     }
 
+
     public function download(Request $request){
         return response()->download(public_path().'/images/anexos/'.$request->anexo);
     }
@@ -295,7 +297,6 @@ class SolicitanteController extends Controller
         if ($idchamado) {
             //$request->session()->flash('alert-danger', 'Exclusão realizada com sucesso!');
             //enviando email
-
             Mail::send('app.solicitante.mail.exclusao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
                 $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
                 $message->to($_SESSION['email']);

@@ -45,7 +45,6 @@
     <div class="container">
         <!--AVISO DE ATRIBUIÇÃO-->
 
-
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
                 <div class="alert alert-success mt-3" role="alert">
@@ -87,7 +86,9 @@
                                 <td>{{ $dados_chamado->titulo }}</td>
                                 <td>
                                     <?php $valor = $dados_chamado->tipo_erro; ?>
-                                    @include('app.layouts._partials.tecnico.tipo_erro_exibicao')
+                                    @include(
+                                        'app.layouts._partials.tecnico.tipo_erro_exibicao'
+                                    )
                                 </td>
                                 <td>
                                     <?php
