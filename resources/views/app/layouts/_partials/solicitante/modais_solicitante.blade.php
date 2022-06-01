@@ -57,27 +57,11 @@
 
                             <div class="row">
                                 <div class="col-12 col-sm-4  mb-4">
-                                    <?php
-                                $anexo = $dados_chamado->anexo;
-
-                                $tipo_anexo = explode(".", $anexo);
-
-                                if(sizeof($tipo_anexo) == 'png' || sizeof($tipo_anexo) == 'jpg'){
-                                ?>
 
                                     <h5>Anexo</h5>
-                                    <a data-fancybox="gallery1" href="{{ asset('/public/images/anexos/'. $dados_chamado->anexo) }}"><img
-                                        src="{{ asset('/public/images/anexos/'. $dados_chamado->anexo) }}" style="width: 50%;"></a>
-                                    <?php
-                                }
+                                    <a data-fancybox="gallery1" href="{{ url('public/images/anexos/' . $dados_chamado->anexo) }}"><img
+                                        src="{{ url('public/images/anexos/' . $dados_chamado->anexo) }}" style="width: 50%;"></a>
 
-                                if(sizeof($tipo_anexo) == 'txt' || sizeof($tipo_anexo) == 'csv' || sizeof($tipo_anexo) == 'xlsx'){
-                                ?>
-
-                                    <img src="{{ asset('/public/images/arquivo.png') }}" style="width: 20%;">
-                                    <?php
-                                }
-                                    ?>
                                 </div>
                                 <div class="col-6 col-sm-4">
                                     <h5>Data de Abertura</h5>
