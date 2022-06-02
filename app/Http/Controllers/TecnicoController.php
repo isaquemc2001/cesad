@@ -138,17 +138,18 @@ class TecnicoController extends Controller
 
         if ($idchamado) {
 
-            //enviando email tecnico
-            Mail::send('app.tecnico.mail.atribuicao_tecnico', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                $message->to($_SESSION['email']);
-            });
 
-            //enviando email solicitante
-            Mail::send('app.tecnico.mail.atribuicao_solicitante', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                $message->to($_SESSION['endereco']);
-            });
+            // //enviando email tecnico
+            // Mail::send('app.tecnico.mail.atribuicao_tecnico', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+            //     $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+            //     $message->to($_SESSION['email']);
+            // });
+
+            // //enviando email solicitante
+            // Mail::send('app.tecnico.mail.atribuicao_solicitante', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+            //     $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+            //     $message->to($_SESSION['endereco']);
+            // });
 
             $_SESSION['endereco'] = $endereco;
 
@@ -194,22 +195,22 @@ class TecnicoController extends Controller
         }
 
         if ($idchamado) {
-            //enviando email tecnico
-            Mail::send('app.tecnico.mail.status_tecnico', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                $message->to($_SESSION['email']);
-            });
 
-            //enviando email solicitante
-            Mail::send('app.tecnico.mail.status_solicitante', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                $message->to($_SESSION['endereco']);
-            });
+            // //enviando email tecnico
+            // Mail::send('app.tecnico.mail.status_tecnico', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+            //     $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+            //     $message->to($_SESSION['email']);
+            // });
+
+            // //enviando email solicitante
+            // Mail::send('app.tecnico.mail.status_solicitante', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+            //     $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+            //     $message->to($_SESSION['endereco']);
+            // });
 
             $request->session()->flash('alert-danger', 'Status alterado com sucesso!');
 
             return redirect()->route('chamado.meuschamados', ['titulo' => 'Meus chamados', 'dados_chamado' => $dados_chamado, 'usuario' => $usuario, 'tecnico' => $tecnico, 'status_alterado' => $status_alterado, 'tipo_erro' => $tipo_erro, 'nome_solicitante_mail' => $nome_solicitante_mail]);
-
         } else {
 
             $request->session()->flash('alert-danger', 'Status alterado com sucesso!');

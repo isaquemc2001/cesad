@@ -58,9 +58,44 @@
                             <div class="row">
                                 <div class="col-12 col-sm-4  mb-4">
 
+                                    <?php
+                                        $anexo = $dados_chamado->anexo;
+
+                                        $tipo_arquivo = explode('.', $anexo);
+
+                                        if($tipo_arquivo[0] == ''){
+                                            $tipo_arquivo[1] = 'null';
+                                            $tipo_arquivo[0] = 'null';
+                                        }
+                                    ?>
+
+                                    <!--tipo imagem-->
+                                    <?php
+                                    if($tipo_arquivo[1] == 'png' || $tipo_arquivo[1] == 'jpg'){
+                                    ?>
+
                                     <h5>Anexo</h5>
-                                    <a data-fancybox="gallery1" href="{{ url('public/images/anexos/' . $dados_chamado->anexo) }}"><img
-                                        src="{{ url('public/images/anexos/' . $dados_chamado->anexo) }}" style="width: 50%;"></a>
+
+                                    <a data-fancybox="gallery1"
+                                        href="{{ asset('public/images/anexos/' . $dados_chamado->anexo) }}"><img
+                                            src="{{ asset('public/images/anexos/' . $dados_chamado->anexo) }}"
+                                            style="width: 50%;"></a>
+
+                                    <!--tipo excell-->
+                                    <?php
+                                    }else if($tipo_arquivo[1] == 'xlsx' || $tipo_arquivo[1] == 'xls' || $tipo_arquivo[1] == 'txt' || $tipo_arquivo[1] == 'csv'){
+                                    ?>
+
+                                    <img class="icone-anexo" src="{{ asset('public/images/excel.png') }}" title="{{ $dados_chamado->anexo }}">
+
+                                    <!--tipo pdf-->
+                                    <?php
+                                    }else if($tipo_arquivo[1] == 'pdf'){
+                                    ?>
+                                    <img class="icone-anexo" src="{{ asset('public/images/pdf.png') }}" title="{{ $dados_chamado->anexo }}">
+                                    <?php
+                                    }
+                                    ?>
 
                                 </div>
                                 <div class="col-6 col-sm-4">

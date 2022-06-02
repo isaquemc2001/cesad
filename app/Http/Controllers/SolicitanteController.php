@@ -153,10 +153,11 @@ class SolicitanteController extends Controller
 
             //$request->session()->flash('alert-danger', 'Chamado cadastrado com sucesso!');
 
-            Mail::send('app.solicitante.mail.novo_chamado', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                $message->to($_SESSION['email']);
-            });
+            // Mail::send('app.solicitante.mail.novo_chamado', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+            //     $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+            //     $message->to($_SESSION['email']);
+            // });
+            $request->session()->flash('alert-danger', 'Cadastrado com sucesso!');
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'cadastrado' => $cadastrado, 'editado' => $editado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             //$request->session()->flash('alert-danger', 'Chamado cadastrado com sucesso!');
@@ -215,7 +216,6 @@ class SolicitanteController extends Controller
         $usuario = AppChamado::with('usuario')->get();
 
         if ($idchamado) {
-            //$request->session()->flash('alert-danger', 'Edição realizada com sucesso!');
 
             //atribuindo nome do tecnico
             $endereco = $_SESSION['endereco'];
@@ -228,24 +228,27 @@ class SolicitanteController extends Controller
                 $_SESSION['endereco'] = $mail_tecnico->email;
 
                 //enviando email
-                Mail::send('app.solicitante.mail.atualizacao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                    $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                    $message->to($_SESSION['endereco']);
-                });
+            //     Mail::send('app.solicitante.mail.atualizacao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+            //         $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+            //         $message->to($_SESSION['endereco']);
+            //     });
 
-                Mail::send('app.solicitante.mail.nova_edicao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                    $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                    $message->to($_SESSION['email']);
-                });
-            } else {
-                //enviando email
-                Mail::send('app.solicitante.mail.nova_edicao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                    $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                    $message->to($_SESSION['email']);
-                });
+            //     Mail::send('app.solicitante.mail.nova_edicao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+            //         $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+            //         $message->to($_SESSION['email']);
+            //     });
+            // } else {
+            //     //enviando email
+            //     Mail::send('app.solicitante.mail.nova_edicao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+            //         $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+            //         $message->to($_SESSION['email']);
+            //     });
             }
 
+
             $_SESSION['endereco'] = $endereco;
+
+            $request->session()->flash('alert-danger', 'Edição realizada com sucesso!');
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             //$request->session()->flash('alert-danger', 'Edição realizada com sucesso!');
@@ -295,12 +298,12 @@ class SolicitanteController extends Controller
         $usuario = AppChamado::with('usuario')->get();
 
         if ($idchamado) {
-            //$request->session()->flash('alert-danger', 'Exclusão realizada com sucesso!');
             //enviando email
-            Mail::send('app.solicitante.mail.exclusao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
-                $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
-                $message->to($_SESSION['email']);
-            });
+            // Mail::send('app.solicitante.mail.exclusao', ['nomeusuario' => $_SESSION['nome']], function ($message) {
+            //     $message->from('cesadufs.ti@gmail.com', 'CESAD')->subject('Chamado - Atualização (não responda)');
+            //     $message->to($_SESSION['email']);
+            // });
+            $request->session()->flash('alert-danger', 'Exclusão realizada com sucesso!');
             return view('app.solicitante.index', ['titulo' => 'Principal Solicitante', 'tipo_erro' => $tipo_erro, 'dados_chamado' => $dados_chamado, 'dados_usuario' => $dados_usuario, 'editado' => $editado, 'cadastrado' => $cadastrado, 'excluido' => $excluido, 'usuario' => $usuario, 'tecnico' => $tecnico]);
         } else {
             //$request->session()->flash('alert-danger', 'Exclusão realizada com sucesso!');

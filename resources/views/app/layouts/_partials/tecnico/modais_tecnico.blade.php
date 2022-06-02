@@ -17,7 +17,9 @@
 
                             <div class="row">
                                 <div class="col-12 col-sm-6">
-                                    @include('app.layouts._partials.tecnico.nome_tecnico')
+                                    @include(
+                                        'app.layouts._partials.tecnico.nome_tecnico'
+                                    )
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <h5>Nome do Solicitante</h5>
@@ -63,7 +65,9 @@
                                     <select id="categoria-disabled" class="form-select mb-4" disabled>
                                         <option>
                                             <?php $valor = $dados_chamado->tipo_erro; ?>
-                                            @include('app.layouts._partials.tecnico.tipo_erro_exibicao')
+                                            @include(
+                                                'app.layouts._partials.tecnico.tipo_erro_exibicao'
+                                            )
                                         </option>
                                     </select>
                                 </div>
@@ -73,23 +77,44 @@
                                 <div class="col-12 col-sm-4 mb-4">
 
                                     <?php
-                                    $anexo = $dados_chamado->anexo;
-                                    echo $anexo;
+                                        $anexo = $dados_chamado->anexo;
 
-                                    $tipo = explode('.', $anexo);
-                                    $tipo_arquivo = substr($tipo[0], 1);
-                                    print_r($tipo_arquivo);
+                                        $tipo_arquivo = explode('.', $anexo);
+
+                                        if($tipo_arquivo[0] == ''){
+                                            $tipo_arquivo[1] = 'null';
+                                            $tipo_arquivo[0] = 'null';
+                                        }
+                                    ?>
+
+                                    <!--tipo imagem-->
+                                    <?php
+                                    if($tipo_arquivo[1] == 'png' || $tipo_arquivo[1] == 'jpg'){
                                     ?>
 
                                     <h5>Anexo</h5>
+
                                     <a data-fancybox="gallery1"
-                                        href="{{ url('public/images/anexos/' . $dados_chamado->anexo) }}"><img
-                                            src="{{ url('public/images/anexos/' . $dados_chamado->anexo) }}"
+                                        href="{{ asset('public/images/anexos/' . $dados_chamado->anexo) }}"><img
+                                            src="{{ asset('public/images/anexos/' . $dados_chamado->anexo) }}"
                                             style="width: 50%;"></a>
+
+                                    <!--tipo excell-->
+                                    <?php
+                                    }else if($tipo_arquivo[1] == 'xlsx' || $tipo_arquivo[1] == 'xls' || $tipo_arquivo[1] == 'txt' || $tipo_arquivo[1] == 'csv'){
+                                    ?>
+
+                                    <img class="icone-anexo" src="{{ asset('public/images/excel.png') }}" title="{{ $dados_chamado->anexo }}">
+
+                                    <!--tipo pdf-->
+                                    <?php
+                                    }else if($tipo_arquivo[1] == 'pdf'){
+                                    ?>
+                                    <img class="icone-anexo" src="{{ asset('public/images/pdf.png') }}" title="{{ $dados_chamado->anexo }}">
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
-
-
-
                                 <div class="col-6 col-sm-4">
                                     <h5>Data de Abertura</h5>
                                     <input type="text" class="form-control mb-4" value="@php echo $data_abertura = implode('/', array_reverse(explode('-', $dados_chamado->data_abertura))); @endphp" disabled>
@@ -103,8 +128,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <a
-                                        href={{ route('chamado.solicitante.download', ['anexo' => $dados_chamado->anexo]) }}><Button
+                                    <a href={{ route('chamado.solicitante.download', ['anexo' =>  $dados_chamado->anexo ]) }}><Button
                                             class="btn btn-primary mb-4">Baixar Anexo</Button></a>
                                 </div>
                             </div>
@@ -160,7 +184,9 @@
                         <div class="col">
                             <div class="row">
                                 <div class="col">
-                                    @include('app.layouts._partials.tecnico.select_tecnico')
+                                    @include(
+                                        'app.layouts._partials.tecnico.select_tecnico'
+                                    )
                                 </div>
                                 <div class="col">
                                     <h6>Selecione a Prioridade</h6>
@@ -172,7 +198,9 @@
                                     </select>
                                 </div>
                                 <input type="number" name="status" value="1" hidden>
-                                @include('app.layouts._partials.tecnico.solicitante_mail')
+                                @include(
+                                    'app.layouts._partials.tecnico.solicitante_mail'
+                                )
                             </div>
                         </div>
                     </div>
@@ -213,7 +241,9 @@
                             <textarea class="form-control" name="resposta">{{ $dados_chamado->resposta }}</textarea>
 
                             <input type="text" value="@php echo $data_alteracao = date('d/m/Y')  @endphp" name="data_alteracao" hidden>
-                            @include('app.layouts._partials.tecnico.solicitante_mail')
+                            @include(
+                                'app.layouts._partials.tecnico.solicitante_mail'
+                            )
                         </div>
                     </div>
                     <div class="modal-footer">
