@@ -111,8 +111,31 @@
 
                         <div class="row">
                             <div class="col">
+                                <!--tipo imagem-->
+                                <?php
+                                if($tipo_arquivo[1] == 'png' || $tipo_arquivo[1] == 'jpg'){
+                                ?>
+
                                 <a href={{ route('chamado.solicitante.download', ['anexo' =>  $dados_chamado->anexo ]) }}><Button
-                                        class="btn btn-primary mb-4">Baixar Anexo</Button></a>
+                                    class="btn btn-primary mb-4">Baixar Anexo</Button></a>
+
+                                <!--tipo excell-->
+                                <?php
+                                }else if($tipo_arquivo[1] == 'xlsx' || $tipo_arquivo[1] == 'xls' || $tipo_arquivo[1] == 'txt' || $tipo_arquivo[1] == 'csv'){
+                                ?>
+
+                                <a href={{ route('chamado.solicitante.download', ['anexo' =>  $dados_chamado->anexo ]) }}><Button
+                                    class="btn btn-primary mb-4">Baixar Anexo</Button></a>
+
+                                <!--tipo pdf-->
+                                <?php
+                                }else if($tipo_arquivo[1] == 'pdf'){
+                                ?>
+                                <a href={{ route('chamado.solicitante.download', ['anexo' =>  $dados_chamado->anexo ]) }}><Button
+                                    class="btn btn-primary mb-4">Baixar Anexo</Button></a>
+                                <?php
+                                }
+                                ?>
 
                             </div>
                         </div>
