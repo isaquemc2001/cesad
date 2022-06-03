@@ -110,10 +110,16 @@
                                     <?php
                                     }else if($tipo_arquivo[1] == 'pdf'){
                                     ?>
+
                                     <img class="icone-anexo" src="{{ asset('public/images/pdf.png') }}" title="{{ $dados_chamado->anexo }}">
+
                                     <?php
-                                    }
+                                    }else if($tipo_arquivo[1] == 'docx'){
                                     ?>
+
+                                    <img class="icone-anexo" src="{{ asset('public/images/word.png') }}" title="{{ $dados_chamado->anexo }}">
+
+                                    <?php } ?>
                                 </div>
                                 <div class="col-6 col-sm-4">
                                     <h5>Data de Abertura</h5>
@@ -151,8 +157,11 @@
                                     <a href={{ route('chamado.solicitante.download', ['anexo' =>  $dados_chamado->anexo ]) }}><Button
                                         class="btn btn-primary mb-4">Baixar Anexo</Button></a>
                                     <?php
-                                    }
+                                    }else if($tipo_arquivo[1] == 'docx'){
                                     ?>
+                                    <a href={{ route('chamado.solicitante.download', ['anexo' =>  $dados_chamado->anexo ]) }}><Button
+                                        class="btn btn-primary mb-4">Baixar Anexo</Button></a>
+                                    <?php } ?>
 
                                 </div>
                             </div>
